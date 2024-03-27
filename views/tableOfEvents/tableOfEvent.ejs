@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Of Events</title>
+    <style>
+        .grey{
+            background-color: gray;
+        }
+        td{
+            size: 70px;
+            height: 100px;
+            width: 150px;
+        }
+    </style>
+    <script type="text/javascript">
+        localStorage.setItem('count',0);
+        function createImge(){
+            var img=document.createElement('img');
+        img.setAttribute('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZJu-5mKNUngN8DKvHN4vDEsOfg9XgwWt92T4Dw2XLxbNdzQiFd_nYTkYYJg&s')
+        img.setAttribute('alt','Not Found')
+        document.getElementById('krishna').appendChild(img);
+        img.addEventListener('dblclick',function(){
+            alert('Jay Shree Krishna')
+        });
+        }
+        function onBlur(){
+            const x = document.getElementById("onblur");
+            x.value = x.value.toUpperCase();
+            alert("Onblur Triggred!");
+        }
+        function onChange(){
+            alert("OnChange Triggred!");
+        }
+        function onResize(){
+            alert(window.outerHeight);
+        }
+    </script>
+</head>
+<body onunload="alert('onUnload triggred')" onpageshow="alert('onpageshow triggred')" onresize="onResize()" onload="alert('onload triggred!')" ononline="alert('online triggred!')" onopen="alert('onopen triggred')" onoffline="alert('onoffline triggred')"> 
+    
+        <form action="#" method="get" onsubmit="confirm('are you sure?')">
+            <table border="3px">
+                <caption>Table Of Events</caption>
+        <tr>
+            <td class="grey"> onblur <br>
+                <input type="text" name="name" id="onblur" value="onBlur" onblur="onBlur()">
+            </td>
+            <td>    onchange
+                <input type="text" name="onchange" id="onchange" value="onchange" onchange="onChange()">
+            </td>
+            <td class="grey">
+                onfocus
+                <input type="text" name="onfoca" id="onfocus" value="onfocus" onfocus="alert('onfocus Triggred!')">
+            </td>
+            <td>
+                oninput
+                <input type="text" name="oninput" id="oninput" value="oninput" oninput="alert('oninput triggred!')">
+            </td>
+            <td class="grey">
+                oninvalid
+                <input type="text" name="oninvalid" id="oninvalid" pattern=".{6,}" oninvalid="alert('oninvalid Triggred!');">    
+            </td>
+            <td>
+                onreset
+                <input type="text" name="onreset" id="onreset" onreset="alert('onreset triggred!')">
+            </td>
+            <td class="grey"> 
+                ondoubleclick
+                <button ondblclick="alert('ondoubleclick Triggred!')" >ondoubleclick</button>
+            </td>
+            <td>
+                <!-- onSearch
+                <input type="search" name="onSearch" id="onSearch" onsearch="alert('on search triggred')"> -->
+                onclick
+                <input type="text" name="" id="" onclick="alert('firstOnckick')" onclick="alert('onclick triggred!')">
+            </td>
+            <td class="grey">
+                ondrag
+                <input type="text" name="" id="" draggable="true" ondrag="alert('ondrag triggred!')">
+            </td>
+            <td>
+                ondragEnd
+                <input type="text" name="" id="" draggable="true" ondragend="alert('ondragEnd triggred!')">
+            </td>
+        </tr>
+        <tr>
+            <td>ondragenter
+                <input type="text" name="" id="" draggable="true" ondragenter="alert('ondragenter triggred!')"></td>
+            <td class="grey"> 
+                ondragleave
+                <input type="text" name="" id=" " draggable="true" ondragleave="alert('ondragleave triggred' );">
+            </td>
+            <td>ondragover
+                <input type="text" name="" id="" draggable="true" ondragover="alert('ondragover is triggred!')">
+            </td>
+            <td class="grey">
+            ondragstart
+            <input type="text" name="" id="" draggable="true" ondragstart="alert('ondragstart triggred')">    
+            </td>
+            <td>
+                ondrop
+                <input type="text" name="" id="" draggable="true" ondrop="alert('ondrop triggred!')">
+            </td>
+            <td class="grey"> 
+                on error
+                <img src="asd.txt" onerror="alert('onerror triggred!')">onError</a>
+            </td>
+            <td>
+                onfocusin
+                <input type="text" name="" id="" onfocusin="alert('onfocusin triggred!')">
+            </td>
+            <td class="grey">
+                onfcousout
+                <input type="text" name="" id="" onfocusout="alert('onfocusout Triggred!!   ')">     
+            </td>
+            <td>
+                onkeydown
+                <input type="text" name="" id="" onkeydown="alert('onkeydown Triggred!')">
+            </td>
+
+            <td class="grey">
+                Onkeyup
+                <input type="text" name="" id="" onkeyup="alert('onkeyup is triggred')">
+
+            </td>
+            
+        </tr><tr>
+            <td class="grey"> 
+                onkeypress
+                <input type="text" name="" id="" onkeypress="alert('onkeypress is triggred!')">
+            </td>
+            <td>
+                onmousedown
+                <input type="text" onmousedown="alert('onmousedown Triggred!')">
+            </td>
+            <td class="grey"> 
+                onmouseenter
+                <input type="text" name="" id="" onmouseenter="alert('onmouseenter trigreed')">
+            </td>
+            <td>
+                onmouseup
+                <input type="text" name="" id="" onmouseup="alert('onmouseup')">
+            </td>
+            <td class="grey"> 
+                onmousemove
+                <input type="text" name="" id="" onmousemove="alert('onmousemove triggred')" >
+
+            </td>
+            <td>
+                onmouseleave
+                <input type="text" onmouseleave="alert('onmouseleave triggred!')">
+            </td>
+            <td class="grey">
+                onmouseover
+                <input type="text" name="" id=" " onmouseover="alert('onmouseover triggred!')">
+            </td>
+            <td>
+                onmouseout
+                <input type="text" onmouseout="alert('onmouseout triggred!')">
+            </td>
+            <td>onmousewheel
+                <select size="2" onmousewheel="alert('onmousewheel triggred')">
+                    <option value="hindi">hindi</option>
+                    <option value="guj">gujrati</option>
+                    <option value="marathi">marathi</option>
+                </select>
+                not working in firefox
+            </td>
+            <td class="grey">
+                onpaste
+                <input type="text" name="" id="" onpaste="alert('onpaste triggred!')">
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                online and offline
+                <br>
+                this is work with body tag
+                <!-- <input type="text" name="" id="" ononline="alert('Ononline triggred')">
+                <input type="text" name="" id="" onoffline="alert('onoffline triggred!')"> -->
+            </td>
+            <td class="grey"> 
+                oncopy
+                <input type="text" name="" id="" oncopy="alert('oncopy triggred!')">
+            </td>
+            <td>
+                oncut
+                <input type="text" name="" id="" oncut="alert('oncut triggred')">
+            </td>
+            <td class="grey"> 
+                onscroll
+                <select  onscroll="alert('onscroll triggred')">
+                    <option value="hindi">hindi</option>
+                    <option value="guj">gujrati</option>
+                    <option value="marathi">marathi</option>
+                </select>
+            </td>
+            <td>
+                onselect
+                <input type="text" name="" id=" " onselect="alert('onSelect Triggred!')"> 
+            </td>
+            <td class="grey"> 
+                <!-- onstalled
+                <img src="hello.js" name="" id="" onstalled="alert('onstalled triggred')"> -->
+            </td>
+            <td>
+                <details ontoggle="alert('ontoggel Triggred!')">
+                    Rajnikumar
+                </details>
+                <summary>He is the briliant student</summary>
+            </td>
+            <td id="krishna" class="grey"> 
+                <button onclick="createImge()" VALUE ="Add Image" >Add Image</button>
+            </td>
+            <td></td>
+            <td class="grey"> </td>
+        </tr>
+    </table>
+    <input type="submit" name="submit" id="submit">
+    <input type="reset" name="reset" id="reset">
+</form>
+</body>
+</html>

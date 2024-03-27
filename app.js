@@ -198,6 +198,10 @@ app.get('/tictactoe', authoriseToken,(req,res)=>{
     res.render('tictactoe/tictactoe')
 })
 
+app.get('/tableOfEvents', authoriseToken,(req,res)=>{
+    res.render('tableOfEvents/tableOfEvent')
+})
+
 app.listen(port,()=>{
     console.log('Server is running on:'+port)
 })
