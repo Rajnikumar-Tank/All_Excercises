@@ -23,9 +23,9 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookie()) 
 
 const applicationForm=require('./routes/applicationForm/app.js')
-
+const paginationGrid=require('./routes/paginationGrid/app.js')
 app.use('/applicationForm',applicationForm)
-
+app.use('/paginationGrid',paginationGrid)
 const conn = mysql.createConnection({
     database: 'userData',
     host: 'localhost',
