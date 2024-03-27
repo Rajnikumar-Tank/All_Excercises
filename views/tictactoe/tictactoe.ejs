@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>શૂન્ય ચોકડી</title>
+    <style>
+        .cell {
+            width: 200px;
+            height: 200px;
+            border-width: 5px;
+            text-align: center;
+            font-size: 40px;
+            color: black;
+            border-color: rgb(73, 156, 224);
+            border-radius: 5px;
+            background-color: antiquewhite;
+            margin: 0%;
+        }
+        a{
+            font-size: 70px;
+        }
+        div {
+            margin-left: 35%;
+        }
+        .turn{
+            margin-left: 10%;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #Result ,.turn{
+            border: 5px;
+            border-color: blue;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: chartreuse;
+            margin-right: 20px;
+            font-size: 30px;
+        }
+        body{
+            background-color: rgb(44, 81, 81);
+        }
+    </style>
+
+</head>
+
+<body>
+    <p>Rajnikumar Tank</p>
+    <p>Employee Id:24DEV039</p>
+    <center>
+        <h1>શૂન્ય ચોકડી</h1>
+        <p id="Result"> </p>
+
+    </center>
+
+    <form action="#">
+    <div id="tic">
+        <p id="whoSTurn" class="turn">અત્યારે X વાળા સ્પર્ધક૧ રમશે.</p>
+
+        <button class="cell" onclick="clickhandling(this);" id="1"></button>
+        <button class="cell" onclick="clickhandling(this);" id="2"></button>
+        <button class="cell" onclick="clickhandling(this);" id="3"></button>
+        <br>
+        <button class="cell" onclick="clickhandling(this); " id="4"></button>
+        <button class="cell" onclick="clickhandling(this); " id="5"></button>
+        <button class="cell" onclick="clickhandling(this); " id="6"></button>
+        <br>
+        <button class="cell" onclick="clickhandling(this); " id="7"></button>
+        <button class="cell" onclick="clickhandling(this); " id="8"></button>
+        <button class="cell" onclick="clickhandling(this); " id="9"></button>
+    </div>
+
+    <center>
+        <button type="reset" value="ફરીવાર રમો" style="margin: 20px; border-radius: 0%;" onclick="resetGame()"><a href="tictactoe">ફરીવાર રમો</a></button>
+    </form>
+    
+    </center>
+    <script>
+
+        var player2 = 0;
+        var player1 = 1;
+        var turn = player1;
+
+        var td1 = document.getElementById('1').innerHTML;
+
+        var td2 = document.getElementById('2').innerHTML;
+
+        var td3 = document.getElementById('3').innerHTML;
+
+        var td4 = document.getElementById('4').innerHTML;
+
+        var td5 = document.getElementById('5').innerHTML;
+
+        var td6 = document.getElementById('6').innerHTML;
+
+        var td7 = document.getElementById('7').innerHTML;
+
+        var td8 = document.getElementById('8').innerHTML;
+
+        var td9 = document.getElementById('9').innerHTML;
+
+        var boxs = ["", "", "", "", "", "", "", "", ""]
+
+        var whoTurn=document.getElementById('whoSTurn');
+
+        var winConditions = [
+            ['1', '2', '3'],
+            ['4', '5', '6'],
+            ['7', '8', '9'],
+            ['1', '5', '9'],
+            ['3', '5', '7'],
+            ['1', '4', '7'],
+            ['2', '5', '8'],
+            ['3', '6', '9']
+        ]
+        function clickhandling(obj) {
+            if (turn) {
+                whoTurn.innerHTML="અત્યારે O વાળા સ્પર્ધક૨ રમશે. "
+                turn = player2;
+                obj.innerHTML = 'X';
+                obj.disabled = 'true';
+                boxs[parseInt(obj.getAttribute('id'))-1] = 'X'
+                wincheck();
+
+            }
+            else {
+                whoTurn.innerHTML="અત્યારે X વાળા સ્પર્ધક૧ રમશે."
+                turn = player1;
+                obj.innerHTML = 'O';
+                obj.disabled = 'true';
+                boxs[parseInt(obj.getAttribute('id'))-1] = 'O';
+                wincheck();
+            }
+        }
+        function wincheck() {
+            for (let i = 0; i < 8; i++) {
+                var countx = 0;
+                var counto = 0;
+                for (let j = 0; j < 3; j++) {
+                    if (boxs[winConditions[i][j]-1] == 'X') {
+                        countx++;
+                    }
+                    else if (boxs[winConditions[i][j]-1] == 'O') {
+                        counto++;
+                    }
+                    
+                }
+                if (countx == 3) {
+                    alert("અભિનંદન X વિજેતા છે!");
+                    document.getElementById('Result').innerHTML="અભિનંદન X વિજેતા છે!";
+                    document.getElementById('tic').remove();
+                    resetGame();
+                }
+                else if(counto == 3) {
+                    alert('અભિનંદન O વિજેતા છે!');
+                    document.getElementById('Result').innerHTML='અભિનંદન O વિજેતા છે!';
+                    document.getElementById("tic").remove();
+                    resetGame();
+                }
+            }
+            draw();
+        }
+        function draw(){
+            flag=1;
+            for(let i=0;i<9;i++){
+                if(boxs[i]==""){
+                    flag=0;
+                }
+            }
+            if(flag){
+                alert("કોઈ જીત્યું નથી");
+                document.getElementById('Result').innerHTML='કોઈ જીત્યું નથી!';
+                document.getElementById("tic").remove();
+            }
+        }
+        function resetGame() {
+            var boxs = ["", "", "", "", "", "", "", "", ""];
+            document.getElementById('1').innerHTML = '';
+            document.getElementById('2').innerHTML = '';
+            document.getElementById('3').innerHTML = ''
+            document.getElementById('4').innerHTML = ''
+            document.getElementById('5').innerHTML = ''
+            document.getElementById('6').innerHTML = ''
+            document.getElementById('7').innerHTML = ''
+            document.getElementById('8').innerHTML = ''
+            document.getElementById('9').innerHTML = '';
+            td1.disabled = 'false';
+            td2.disabled = 'false';
+            td3.disabled = 'false';
+            td4.disabled = 'false';
+            td5.disabled = 'false';
+            td6.disabled = 'false';
+            td7.disabled = 'false';
+            td8.disabled = 'false';
+            td9.disabled = 'false';
+        }
+    </script>
+</body>
+
+</html>
