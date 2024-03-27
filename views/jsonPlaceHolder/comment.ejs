@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    a {
+      text-decoration: none;
+      background-color: grey;
+      color: white;
+      font-size: xx-large;
+      cursor: pointer;
+    }
+
+    #comment {
+      cursor: pointer;
+      color: blue;
+    }
+
+    #comment:hover {
+      background-color: aqua;
+    }
+
+    #postdata {
+      border-collapse: collapse;
+    }
+  </style>
+  <title>JSONPlaceholder</title>
+</head>
+
+<body>
+
+  <table id="postdata" border="1">
+
+  </table>
+
+  <table id="com" border="1"></table>
+
+  <script>
+    function pagination(json) {
+      const table = document.getElementById('postdata')
+      var result = "<tr>";
+      const Element = json;
+      for (key in Element) {
+        result += "<th>" + (key.toUpperCase()) + "</th>";
+      }
+      result += "<td> Action </td>"
+      result += "</tr>";
+      console.log(json);
+      result += "<tr>";
+      for (key in json) {
+        result += "<td>" + json[key] + "</td>";
+      }
+      result += "<td><span id='comment'>Comments<span></td>"
+      result += "</tr>";
+      table.innerHTML = result;
+      const comment = document.getElementById('comment');
+      const tab = document.getElementById('com');
+      console.log(json.id)
+      var flag = 1;
+      comment.addEventListener('click', () => {
+        if (flag) {
+          
+          fetch("https://jsonplaceholder.typicode.com/posts/" + json.id + "/comments").then((Response) => Response.json()).then((json) => {
+            var tabString = "<tr>";
+            const Element = json[0];
+            for (key in Element) {
+              tabString += "<th>" + (key.toUpperCase()) + "</th>";
+            }
+            tabString += "</tr>";
+            for (let i = 0; i < json.length; i++) {
+              console.log(json[i]);
+              tabString += "<tr>";
+              for (key in json[i]) {
+                tabString += "<td>" + json[i][key] + "</td>";
+              }
+              tabString += "</tr>";
+            }
+            tab.innerHTML = tabString;
+          })
+          flag = 0;
+        } else {
+          flag = 1
+          tab.innerHTML = "";
+        }
+      })
+    }
+
+    function onePost(id) {
+      fetch("https://jsonplaceholder.typicode.com/posts/" + id)
+        .then((Response) => Response.json())
+        .then((json) => {
+          pagination(json)
+        });
+    }
+    const last = window.location.href.charAt(window.location.href.length - 1)
+    onePost(parseInt(last))
+  </script>
+</body>
+
+</html>
