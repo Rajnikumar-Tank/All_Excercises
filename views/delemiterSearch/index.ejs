@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>Delimiter Search</title>
+</head>
+
+<body>
+  <form action="/delemiterSearch/search">
+    <table>
+      <tr>
+        <td><input type="text" name="search" id="search" placeholder="Type here..." value="<%=search%>"></td>
+        <td><input type="submit" name="Go" id="Go" value="Go"></td>
+      </tr>
+    </table>
+  </form>
+  <table border="1">
+    <tr>
+      <td>First Name</td>
+      <td>_</td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td>^</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>$</td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>}</td>
+    </tr>
+    <tr>
+      <td>Mobile Number</td>
+      <td>{</td>
+
+    </tr>
+    <tr>
+      <td>City</td>
+      <td>:</td>
+    </tr>
+  </table>
+  <table border="1">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email Id</th>
+        <th>Age</th>
+        <th>Mobile No.</th>
+        <th>City</th>
+    </tr>
+    <% for(student of result){ %>
+        <tr>
+            <td><%= student.firstname%></td>
+            <td><%= student.lastname%></td>
+            <td><%= student.email%></td>
+            <td><%= student.age%></td>
+            <td><%= student.mobileno%></td>
+            <td><%= student.city%></td>
+        </tr>
+    <%}%>
+  </table>
+</body>
+
+</html>

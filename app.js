@@ -26,10 +26,12 @@ const applicationForm=require('./routes/applicationForm/app.js')
 const paginationGrid=require('./routes/paginationGrid/app.js')
 const studentDetails =require('./routes/StudentDetails/app.js')
 const dynamicTable=require('./routes/DynamicTable/app.js')
+const delemiterSearch=require('./routes/delemiterSearch/app.js')
 app.use('/applicationForm',applicationForm)
 app.use('/paginationGrid',paginationGrid)
 app.use('/studentDetails',studentDetails)
 app.use('/dynamicGrid',dynamicTable)
+app.use('/delemiterSearch',delemiterSearch)
 const conn = mysql.createConnection({
     database: 'userData',
     host: 'localhost',
