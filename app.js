@@ -189,6 +189,10 @@ app.get('/home',authoriseToken,(req,res)=>{
 app.get('/dynamicTable', authoriseToken,(req,res)=>{
     res.render('dynamicTable/dynamicTable')
 })
+
+app.get('/kukukube', authoriseToken,(req,res)=>{
+    res.render('kukukube/kukukube')
+})
 app.listen(port,()=>{
     console.log('Server is running on:'+port)
 })
