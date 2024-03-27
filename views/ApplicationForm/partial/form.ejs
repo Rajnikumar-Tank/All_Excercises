@@ -1,0 +1,54 @@
+<form action="/getData" method="post">
+    <table>
+        <caption>
+            <h1>Application Form</h1>
+        </caption>
+        <tr>
+            <td>
+                <label for="firstName">First name:</label>
+            </td>
+            <td><input type="text" name="firstName" id="firstName" required></td>
+        </tr>
+        <tr>
+            <td><label for="lastname">Last name:</label></td>
+            <td><input type="text" name="lastname" id="lastname" required></td>
+        </tr>
+        <tr>
+            <td><label for="age">Age:</label></td>
+            <td><input type="number" name="age" id="age" required></td>
+        </tr>
+        <tr>
+            <td><label for="phone">Phone Number</label></td>
+            <td><input type="text" name="phone" id="phone" required></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email Id</label></td>
+            <td><input type="text" name="email" id="email" required></td>
+        </tr>
+        <tr class="inline-alin">
+            <td><label for="gender">Gender</label></td>
+            <span class="inline-alin">
+
+                <td><input type="radio" name="gender" id="genderMale" value="Male" selected>Male</td>
+                <td><input type="radio" name="gender" id="genderFemale" value="Female">Female</td>
+                <td><input type="radio" name="gender" id="other" value="Other">Other</td>
+            </span>
+        </tr>
+        <tr>
+            <td><label for="hobbies">Hobbies</label></td>
+            <span class="inline-alin">
+                <td><input type="checkbox" name="hobi[]" value="read">Reading</td>
+                <td><input type="checkbox" name="hobi[]" value="traveling">Traveling</td>
+                <td><input type="checkbox" name="hobi[]" value="singing">Singing</td>
+                <td><input type="checkbox" name="hobi[]" value="codding">Codding</td>
+            </span>
+        </tr>
+        <tr>
+            <td><label for="address">Address:</label></td>
+            <td><textarea name="address" id="address" cols="20" rows="3" required></textarea></td>
+        </tr>
+        <tr>
+            <td><input type="submit" class="btn" value="Submit Form"></td>
+        </tr>
+    </table>
+</form>

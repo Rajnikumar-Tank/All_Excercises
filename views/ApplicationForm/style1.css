@@ -1,0 +1,28 @@
+*{
+    background-color: rgb(217, 211, 194);
+}
+table{
+    margin: 0 auto;
+}
+input{
+    font-size: 16px;
+    border-radius: 15px;
+    height: 30px    ;
+}
+td{
+    width: 300px;
+    height: 50px;
+    border-radius: 15px;
+    text-align: center;
+    background-color: beige;
+}
+th{
+    border: none;
+}
+.btn{
+    background-color: rgb(181, 230, 230);
+    font-size: 20px;
+}
+label{
+    font-size: 25px;
+}

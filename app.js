@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const cookie=require('cookie-parser');
 const dotenv=require('dotenv');
 const md5=require('md5');
+
 dotenv.config();
 const port = process.env.PORT;
 
@@ -20,6 +21,10 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 app.use(cookie()) 
+
+const applicationForm=require('./routes/applicationForm/app.js')
+
+app.use('/applicationForm',applicationForm)
 
 const conn = mysql.createConnection({
     database: 'userData',
