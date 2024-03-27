@@ -1,0 +1,29 @@
+<div class="pagination">
+    <% if(thisPage >1 ) { %>
+        <a href="/dynamicGrid/query?sql=<%=sql%>&page=1&len=<%=len%>&order=<%=order%>" id="left2">&lt;&lt;</a>
+        <a href="/dynamicGrid/query?sql=<%=sql%>&page=<%= parseInt(thisPage)-1 %>&len=<%=len%>&order=<%=order%>" id="left1">&lt</a>
+    <%}
+    else{%>
+        <a  class="disable" id="leftDisable2">&lt;&lt;</a>
+        <a  class="disable" id="leftDisable1">&lt</a>
+    <%}
+    %>
+    <% if(len%rows == 0){ %>
+        
+        <span id="page"><%=parseInt(thisPage)%> page of <%= Math.floor(len/rows)%></span>
+        <%}else{%>
+            <span id="page"><%=parseInt(thisPage)%> page of <%= Math.floor(len/rows)+1%></span>
+        <%}%>
+
+    <% if(thisPage < len/rows) { %>
+        <a href="/dynamicGrid/query?sql=<%=sql%>&page=<%= parseInt(thisPage)+1 %>&len=<%=len%>&order=<%=order%>"id="right1">&gt;</a>
+        <% if(len%rows == 0){ %>
+        <a href="/dynamicGrid/query?sql=<%=sql%>&page=<%= Math.floor(len/rows)%>&len=<%=len%>&order=<%=order%>"id="right2">&gt;&gt;</a>
+        <%}else{%>
+            <a href="/dynamicGrid/query?sql=<%=sql%>&page=<%= Math.floor(len/rows)+1%>&len=<%=len%>&order=<%=order%>"id="right2">&gt;&gt;</a>
+        <%}%>
+    <% } else { %>
+        <a  class="disable" id="rightDisable1">&gt;</a>
+        <a  class="disable" id="rightDisable2">&gt;&gt;</a>
+    <% } %>
+</div>

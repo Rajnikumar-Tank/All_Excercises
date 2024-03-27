@@ -10,7 +10,7 @@ const dotenv=require('dotenv');
 const md5=require('md5');
 
 dotenv.config();
-const port = process.env.PORT;
+const port = process.env.PORT; 
 
 app.set('view engine', 'ejs');
 
@@ -25,9 +25,11 @@ app.use(cookie())
 const applicationForm=require('./routes/applicationForm/app.js')
 const paginationGrid=require('./routes/paginationGrid/app.js')
 const studentDetails =require('./routes/StudentDetails/app.js')
+const dynamicTable=require('./routes/DynamicTable/app.js')
 app.use('/applicationForm',applicationForm)
 app.use('/paginationGrid',paginationGrid)
 app.use('/studentDetails',studentDetails)
+app.use('/dynamicGrid',dynamicTable)
 const conn = mysql.createConnection({
     database: 'userData',
     host: 'localhost',

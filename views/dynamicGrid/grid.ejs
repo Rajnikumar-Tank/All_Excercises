@@ -1,0 +1,58 @@
+<div class="grid">
+    <script>
+        function color(color){
+            order.style.color=sessionStorage.getItem('color'); 
+        }
+
+        function orderUp(order) {
+            if('<%= orderType %>'=='asc'){
+                sessionStorage.setItem('color','green');
+            }
+            else{
+                sessionStorage.setItem('color','darkblue');
+            }
+            location = '/dynamicGrid/query?sql=<%=sql%>&order=' + order.getAttribute('id') +"&orderType=asc&page=<%=1%>&len=<%=len%>";
+        }
+        function orderDown(order) {
+            '<%= orderType="desc" %>';
+            if('<%= orderType %>'=='desc'){
+                sessionStorage.setItem('color','green');
+            }
+            else{
+                sessionStorage.setItem('color','darkblue');
+            }
+            location = '/dynamicGrid/query?sql=<%=sql%>&order=' + order.getAttribute('id') +"&orderType=desc&page=<%=1%>&len=<%=len%>";
+        }
+    </script>
+    <table border="1">
+        <caption>Table of Query</caption>
+        <tr>
+            <% var i=1,j=1; for(field in result[0] ) {%>
+                <th class="head" id="<%=i%>" >
+                    <%=field.toUpperCase(); %>
+                            <div class="order" >
+                                <div class="up" id="<%=i%>" onclick="orderUp(this); color(this)">
+                                <% i+=1; %>
+
+                                    &#10224;
+                                </div>
+                                <div class="down" id="<%=j%>" onclick="orderDown(this); color(this);">
+                                    <% j+=1; %>
+                                    &#x27F1;
+                                </div>
+                            </div>
+                </th>
+                <%}%>
+        </tr>
+        <% for(data of result) {%>
+            <tr>
+                <% for(ele in data){ %>
+                    <td>
+                        <%=data[ele]%>
+                    </td>
+                    <%}%>
+            </tr>
+            <%}%>
+    </table>
+    
+</div>
