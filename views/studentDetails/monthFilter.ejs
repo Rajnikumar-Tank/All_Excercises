@@ -1,0 +1,28 @@
+<select name="month" id="month" onchange="monthChange()">
+    <option value="" selected disabled>Select Month</option>
+
+
+    <% if(month==12){%>
+        <option value="12" selected>December 2023</option>
+        <option value="1">January 2024</option>
+        <option value="2">February 2024</option>
+        <%} else if(month==1){%>
+            <option value="12">December 2023</option>
+            <option value="1" selected>January 2024</option>
+            <option value="2">February 2024</option>
+
+
+            <%} else if(month==2){%>
+                <option value="12">December 2023</option>
+                <option value="1">January 2024</option>
+                <option value="2" selected>February 2024</option>
+
+                <%}%>
+</select>
+<script>
+    function monthChange(arg) {
+        var month = document.getElementById('month').value;
+        location = '/studentDetails/?month=' + month;
+        console.log(month);
+    }
+</script>

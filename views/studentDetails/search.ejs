@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/searchStyle.css">
+  <title>Search</title>
+</head>
+
+<body>
+  <div class="search">
+    <table>
+      <form action="studentDetails/search">
+        <tr>
+          <td><input type="text" name="id" id="id" placeholder="Type Student Id.." autofocus></td>
+          <td><input type="submit" value="Go"></td>
+
+      </form>
+      <td>
+        <a id="show" onclick="show();">Show More</a>
+      </td>
+      </tr>
+      <tr></tr>
+      <tr></tr>
+      <tr></tr>
+      <tr class="hidden" id="hide">
+        <td>Search by more details:</td>
+        <form action="studentDetails/search">
+          <td><input type="text" name="name" id="name" placeholder="Search by name..."></td>
+          <td><input type="text" name="gender" id="gender" placeholder="Search by gender..."></td>
+          
+            <td>Search by percentage range:<input type="text" name="startPercentage" id="startPercentage" placeholder="search start percentage point "></td>
+            <td><input type="text" name="endPercentage" id="endPercentage" placeholder="search start percentage point "></td>
+          <td><input type="submit" name="Go" id="Go" value="Go"></td>
+        </form>
+      </tr>
+    </table>
+    <table border="1">
+      <caption>
+        <h2>Student Result Details..</h2>
+      </caption>
+      <tr>
+        <td>Student Id</td>
+        <td>Student name</td>
+        <td>Gender</td>
+        <td>Practical marks</td>
+        <td>Theory marks</td>
+        <td>Total marks</td>
+        <td>Percentage</td>
+      </tr>
+      <%for(student of result){%>
+      <tr>
+        <td><%=student.studId%></td>
+        <td><%=student.name%></td>
+        <td><%=student.gender %></td>
+        <td><%=student.practical%></td>
+        <td><%=student.theory%></td>
+        <td><%=student.total%></td>
+        <td><%=(student.percentage).toFixed(2)%>%</td>
+      </tr>
+      <%}%>
+</table>
+</div>
+<script>
+    function show(){
+        const show=document.getElementById('hide');
+        if(show.classList.contains('hidden')){
+            document.getElementById('show').innerText='Hide';
+            show.classList.remove('hidden');
+        }
+        else{
+            document.getElementById('show').innerText='Show More';
+            show.classList.add('hidden');
+        }
+    }
+</script>
+</body>
+</html>

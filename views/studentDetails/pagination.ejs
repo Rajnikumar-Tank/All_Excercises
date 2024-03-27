@@ -1,0 +1,19 @@
+<div class="pagination">
+    <% if(thisPage >0 ) { %>
+        <a href="/studentDetails/?page=<%= 0 %>&month=<%=month%>" id="left2">&lt;&lt;</a>
+        <a href="/studentDetails/?page=<%= parseInt(thisPage)-1 %>&month=<%=month%>" id="left1">&lt</a>
+    <%}
+    else{%>
+        <a  class="disable" id="leftDisable2">&lt;&lt;</a>
+        <a  class="disable" id="leftDisable1">&lt</a>
+    <%}
+    %>
+        <span id="page"><%=parseInt(thisPage)+1%> page of <%= parseInt(totalRecord/50)+1 %></span>
+    <% if(thisPage <= parseInt(totalRecord/50)-1) { %>
+        <a href="/studentDetails/?page=<%= parseInt(thisPage)+1 %>&month=<%=month%>" id="right1">&gt;</a>
+        <a href="/studentDetails/?page=<%= parseInt(totalRecord/50) %>&month=<%=month%>" id="right2">&gt;&gt;</a>
+    <% } else { %>
+        <a  class="disable" id="rightDisable1">&gt;</a>
+        <a  class="disable" id="rightDisable2">&gt;&gt;</a>
+    <% } %>
+</div>

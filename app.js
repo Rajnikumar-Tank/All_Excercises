@@ -24,13 +24,15 @@ app.use(cookie())
 
 const applicationForm=require('./routes/applicationForm/app.js')
 const paginationGrid=require('./routes/paginationGrid/app.js')
+const studentDetails =require('./routes/StudentDetails/app.js')
 app.use('/applicationForm',applicationForm)
 app.use('/paginationGrid',paginationGrid)
+app.use('/studentDetails',studentDetails)
 const conn = mysql.createConnection({
     database: 'userData',
     host: 'localhost',
     user: 'root',
-    password: 'root'
+    password: 'root' 
 })
 conn.connect((err) => {
     if (err) {

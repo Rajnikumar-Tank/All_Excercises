@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style2.css">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <table>
+    <caption>
+      <h1>Rajnikumar Tank</h1>
+      <h1>Attendence</h1>
+    </caption>
+    <div class="form">
+      <form action="/studentDetails/attendence4march">
+        <table>
+          <tr>
+            <td>
+              <input type="text" name="studId" id="studId" placeholder="Enter Student Id.." autofocus>
+            </td>
+            <td>
+              <input type="submit" value="Go">
+            </td>
+      </form>
+      <td>
+        <p id="show" onclick="showMore()">
+          Show More
+        </p>
+        </a>
+      </td>
+      </tr>
+      <form action="/studentDetails/attendence4march">
+        <tr id="searchName">
+          <td><input type="text" name="name" id="name" placeholder="Type name for search..."></td>
+          <td><input type="text" name="days" id="days" placeholder="Enter present days..."></td>
+          <td><input type="text" name="startRange" id="startRange" placeholder="enter Attendence start point parcentage" ></td>
+          <td> <input type="text" name="endRange" id="endRange" placeholder="enter Attendence end point parcentage "></td>
+          <td><input type="submit" name="" id="" value="Go"></td>
+        </tr>
+      </form>
+  </table>
+
+  </div>
+  <%var details=details || null %>
+  <%if(details){%>
+  <table>
+    <tr>
+      <th>Student Id</th>
+      <th>Student Name</th>
+      <th>Present Days</th>
+      <th>Attendence Persentage</th>
+    </tr>
+
+    <% for(detail of details){ %>
+    <tr>
+      <td><%=detail.studId%></td>
+      <td><%=detail.name%></td>
+      <td><%=detail.presentDays%></td>
+      <% if(month == 12 || month == 1){ %>
+      <td><%=(parseFloat(detail.presentDays)/91*100).toFixed(2)%>%</td>
+      <%}%>
+            <% if(month ==2){ %>
+      <td><%=(parseFloat(detail.presentDays)/91*100).toFixed(2)%>%</td>
+      <%}%>
+            </tr>
+            <% }%>
+      <%}%>
+        </table>
+        <script>
+            var count = 0;
+            function showMore(){
+                var show = document.getElementById('show');
+                if(count%2!=0){
+                    show.innerHTML='Show More';
+                    document.getElementById('searchName').style.display='none';
+                }
+                else{
+                    show.innerHTML='Hide';
+                    document.getElementById('searchName').style.display='block';
+                }
+                count +=1; 
+            }
+            </script>
+            </body>
+            </html>

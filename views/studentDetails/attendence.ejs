@@ -1,0 +1,23 @@
+<table>
+    <caption><h1>Rajnikumar Tank</h1><h1>Attendence</h1></caption>
+    <tr>
+        <th>Student Id</th>
+        <th>Student Name</th>
+        <th>Present Days</th>
+        <th>Attendence Persentage</th>
+    </tr>
+    <% for(detail of details){ %>
+        <tr>
+
+            <td><%=detail.studId%></td>
+            <td><%=detail.name%></td>
+            <td><%=detail.presentDays%></td>
+            <% if(month == 12 || month == 1){ %>
+            <td><%=(parseFloat(detail.presentDays)/31*100).toFixed(2)%>%</td>
+            <%}%>
+            <% if(month ==2){ %>
+                <td><%=(parseFloat(detail.presentDays)/29*100).toFixed(2)%>%</td>
+                <%}%>
+        </tr>
+    <% }%>
+</table>

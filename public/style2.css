@@ -1,0 +1,47 @@
+table{
+    border: 1px solid black;
+    width: 1300px;
+    margin: 0 auto;
+}
+td{
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+}
+th{
+    border: 1px solid black;
+
+}
+a{
+    text-decoration: none;
+    background-color: rgb(187, 180, 180);
+    border-radius: 15px;
+    color: rgb(0, 0, 0);
+    padding: 1px;
+    margin: 5px;
+}
+a:hover{
+    background-color: aquamarine;
+    width: 20px;
+    height: 25px;
+}
+a:focus{
+    background-color: rgb(208, 124, 22);
+}
+.disable{
+    opacity: 0.5;
+    pointer-events: none;
+}
+.foot{
+    text-align: center;
+}
+.form table{
+    width: 300px;
+}
+#show{
+    cursor: pointer;
+    color:Green
+}
+#searchName{
+    display: none;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style2.css">
+  <title>Result</title>
+</head>
+
+<body>
+  <div class="foot">
+    <h3>Rajnikumar Tank</h3>
+  </div>
+  <div class="form">
+    <form action="/studentDetails/resultSearch">
+      <table>
+        <tr>
+          <td>
+            <input type="text" name="studId" id="studId"  placeholder="Enter Student Id.." autofocus>
+          </td>
+          <td>
+            <input type="submit" value="Go">
+          </td>
+    </form>
+    <td>
+      <p id="show" onclick="showMore()">
+        Show More
+      </p>
+      </a>
+    </td>
+    </tr>
+    <form action="/studentDetails/resultSearch"></form>
+    <tr id="searchName">
+      <td><input type="text" name="name" id="name" placeholder="Type name for search..."></td>
+      <td><input type="submit" name="" id="" value="Go"></td>
+    </tr>
+    </table>
+
+  </div>
+  <% var final= final || null %>
+  <% var prelims= prelims || null %>
+  <% var terminalData= terminalData || null %>
+  <% if(final && prelims && terminalData){ %>
+  <table>
+    <caption>Results</caption>
+    <tr>
+      <th rowspan="2">Student Id</th>
+      <th rowspan="2">Student name</th>
+      <th colspan="2">Prelims</th>
+      <th colspan="2">Terminal</th>
+      <th colspan="2">Final</th>
+      <th rowspan="2">Total</th>
+      <th rowspan="2">Action</th>
+    </tr>
+    <tr>
+      <th>Prectical</th>
+      <th>Thoery</th>
+      <th>Prectical</th>
+      <th>Thoery</th>
+      <th>Prectical</th>
+      <th>Thoery</th>
+    </tr>
+    <% for(let i=0;i<final.length;i++){ %>
+
+    <tr>
+      <td><%= final[i].studId%></td>
+      <td><%= final[i].name %></td>
+      <td><%= prelims[i].pp %></td>
+      <td><%= prelims[i].pt %></td>
+      <td><%= terminalData[i].pp%></td>
+      <td><%= terminalData[i].pt%></td>
+      <td><%= final[i].pp %></td>
+      <td><%= final[i].pt %></td>
+      <td><%= prelims[i].pp+prelims[i].pt+terminalData[i].pp+terminalData[i].pt+final[i].pp+final[i].pt %></td>
+      <td><a href="/studentDetails/report?studId=<%= final[i].studId%>">View More</a></td>
+    </tr>
+    <% } %>
+  </table>
+  <% } else{%>
+
+  <%}%>
+
+  <script>
+    var count = 0;
+    function showMore(){
+        var show = document.getElementById('show');
+        if(count%2!=0){
+          show.innerHTML='Show More';
+          document.getElementById('searchName').style.display='none';
+        }
+        else{
+          show.innerHTML='Hide';
+          document.getElementById('searchName').style.display='block';
+        }
+        count+=1;
+    }
+  </script>
+</body>
+
+</html>
