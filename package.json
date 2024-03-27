@@ -1,0 +1,24 @@
+{
+  "name": "all_excercise",
+  "version": "1.0.0",
+  "description": "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",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon serve app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "generate-unique-id": "^2.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "md5": "^2.3.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.0"
+  }
+}

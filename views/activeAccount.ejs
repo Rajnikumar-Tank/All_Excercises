@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activate Account</title>
+</head>
+
+<body>
+  <% var data= data || null %>
+  <% if(data){ %>
+  <p>Please activate account by copy and paste below link to URL Bar... </p>
+  <a href="/activate?id=<%=data.id%>&token=<%=data.token%>">/activate?id=<%=data.id%>&token=<%=data.token%></a>
+  <% } %>
+
+  <%var eid=eid || null%>
+  <%if(eid){%>
+    <p>Please click below link to update Password... </p>
+    <a href="/passwordForm?eid=<%=eid%>">/passwordForm?eid=<%=eid%></a>
+  <%}%>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Update Password</title>
+</head>
+
+<body>
+  <form name="pswdForm">
+    <input type="hidden" name="email" id="email" value="<%=eid%>">
+    <table id="pswdForm">
+      <tr>
+        <td><label for="email">New Password</label></td>
+        <td><input type="password" name="pwd" id="pwd"></td>
+      </tr>
+      <tr>
+        <td><label for="npwd">Confirm Password</label></td>
+        <td><input type="password" name="npwd" id="npwd"></td>
+      </tr>
+      <tr>
+        <td>
+          <p onclick="updatePassword()" class="btn">Update Password</p>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <script>
+    function require() {
+      const form = document.forms['pswdForm'];
+      const input = document.getElementsByTagName('input');
+      for (i in input) {
+        if (!isNaN(i)) {
+          if (input[i].value.trim() == '') {
+            if (input[i].nextElementSibling == null || input[i].value.trim() == '') {
+              if (input[i].nextElementSibling) {
+                input[i].nextElementSibling.remove();
+              }
+              const err = document.createElement('p');
+              err.style.color = 'red'
+              err.append('Please fill this field!')
+              input[i].parentNode.appendChild(err);
+              input[i].focus();
+              return false;
+            }
+          }
+        } else {
+          break;
+        }
+
+      }
+      if (form['pwd'].value != form['npwd'].value) {
+        alert('Please Fill matching password!!');
+        return false;
+      }
+
+      return true;
+    }
+    let input = document.getElementsByTagName('input');
+    var flag;
+    for (i in input) {
+      if (!isNaN(i)) {
+        input[i].onchange = () => {
+          if (input[i].value != undefined && input[i].value.trim() != '') {
+            if (input[i].nextElementSibling) {
+              input[i].nextElementSibling.remove();
+            }
+          }
+        }
+      }
+    }
+
+    function updatePassword() {
+      const flag = require()
+      if (flag) {
+
+
+
+        fetch('/updatePassword', {
+            body: new URLSearchParams(new FormData(document.forms['pswdForm'])),
+            method: 'Post'
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.msg) {
+              alert(data.msg);
+              document.forms['pswdForm'].reset();
+              window.location.href = '/'
+            }
+          })
+      }
+    }
+  </script>
+</body>
+
+</html>

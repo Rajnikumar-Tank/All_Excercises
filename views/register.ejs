@@ -1,0 +1,130 @@
+<form id="signup" name="signup">
+  <table id="reg">
+    <caption><h2>Registration Form</h2></caption>
+    <tr>
+      <td><label for="firstName">First name:</label></td>
+      <td>
+        <input type="text" name="firstName" id="firstName" placeholder="Enter first name">
+      </td>
+    </tr>
+    <tr>
+      <td><label for="lastName">Last name:</label></td>
+      <td>
+        <input type="text" name="lastName" id="lastName" placeholder="Enter last name">
+      </td>
+    </tr>
+    <tr>
+      <td><label for="email">Email Id:</label></td>
+      <td>
+        <input type="text" name="email" id="email" placeholder="Enter emailId">
+      </td>
+    </tr>
+    <tr>
+      <td><label for="dob">Date of Birth:</label></td>
+      <td>
+        <input type="text" name="dob" id="dob" placeholder="Enter date of birth">
+      </td>
+    </tr>
+    <tr>
+      <td><label for="pwd">Password:</label></td>
+      <td>
+        <input type="password" name="pwd" id="pwd" placeholder="set Password">
+      </td>
+    </tr>
+    <tr>
+      <td><label for="cpwd">Confirm Password:</label></td>
+      <td>
+        <input type="password" name="cpwd" id="cpwd" placeholder="Confirm Password">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <p tabindex="0" onclick="signupth()" value="SIGN UP" name="" id="up" class="btn"> SIGN UP</p>
+      </td>
+    </tr>
+  </table>
+</form>
+<p id="active_link"></p>
+<table>
+  <tr>
+    <td><a href="/">Login Now!</a></td>
+  </tr>
+</table>
+<script>
+  const p=document.getElementById('up');
+  p.onkeypress=(e)=> {
+    console.log(e)
+    if (e.which == 13) {
+      p.dispatchEvent(new Event('click'));  
+    }
+  };
+  function require() {
+    const form = document.forms['signup'];
+    const input = document.getElementsByTagName('input');
+    for (i in input) {
+      if (!isNaN(i)) {
+        if (input[i].value.trim() == '') {
+          if (input[i].nextElementSibling == null || input[i].value.trim() == '') {
+            if (input[i].nextElementSibling) {
+              input[i].nextElementSibling.remove();
+            }
+            const err = document.createElement('p');
+            err.style.color = 'red'
+            err.append('Please fill this field!')
+            input[i].parentNode.appendChild(err);
+            input[i].focus();
+            return false;
+          }
+        }
+      } else {
+        break;
+      }
+
+    }
+    if(form['pwd'].value != form['cpwd'].value){
+        alert('Please Fill matching password!!');
+        return false;
+    }
+    if(form['pwd'].value.length < 6 || form['cpwd'].value.length < 6){
+      alert('please fill atleast 6 charcter');
+      return false;
+    }
+
+    return true;
+  }
+  let input = document.getElementsByTagName('input');
+  var flag;
+  for (i in input) {
+    if (!isNaN(i)) {
+      input[i].onchange = () => {
+        if (input[i].value != undefined && input[i].value.trim() != '' ) {
+          if (input[i].nextElementSibling) {
+            input[i].nextElementSibling.remove();
+          }
+        }
+      }
+    }
+  }
+
+  function signupth() {
+    const flag = require();
+    if (flag) {
+      fetch('/signup', {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(document.getElementById('signup')))
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          if (data.msg != undefined) {
+            alert(data.msg)
+          } else if (data.id != undefined) {
+            document.forms['signup'].reset();
+            window.location.href="/activeLink?id="+data.id+"&token="+data.token;
+          }
+        })
+    }
+  }
+
+  
+</script>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Rajnikumar Tank</h1>
+  <form name='login' id="login">
+    <table>
+      <caption><h2>Login</h2></caption>
+      <tr>
+        <td>
+          <label for="email">Email ID:</label>
+        </td>
+        <td>
+          <input type="text" name="email" id="email" placeholder="Enter email id">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="password">Password</label>
+        </td>
+        <td>
+          <input type="password" name="password" id="password" placeholder="Enter passsword">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p class="btn" onclick="loginth()">LOGIN</p>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <table>
+    <tr>
+      <td><a href="/signup">Create New Account!</a></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/forgot">Forgot Password</a>
+      </td>
+    </tr>
+  </table>
+  <% var msg=msg || null %>
+  <%if(msg){%>
+    <p><%=msg%></p>
+    <p>Please login Again...</p>
+    <%}%>
+  <p></p>
+  <script>
+    function require() {
+      const form = document.forms['login'];
+      const input = document.getElementsByTagName('input');
+      for (i in input) {
+        if (!isNaN(i)) {
+          if (input[i].value.trim() == '') {
+            if (input[i].nextElementSibling == null || input[i].value.trim() == '') {
+              if (input[i].nextElementSibling) {
+                input[i].nextElementSibling.remove();
+              }
+              const err = document.createElement('p');
+              err.style.color = 'red'
+              err.append('Please fill this field!')
+              input[i].parentNode.appendChild(err);
+              input[i].focus();
+              return false;
+            }
+          }
+        } else {
+          break;
+        }
+
+      }
+      return true;
+    }
+    let input = document.getElementsByTagName('input');
+    var flag;
+    for (i in input) {
+      if (!isNaN(i)) {
+        input[i].onchange = () => {
+          if (input[i].value != undefined && input[i].value.trim() != '') {
+              if (input[i].nextElementSibling) {
+                input[i].nextElementSibling.remove();
+              }
+          }
+        }
+      }
+    }
+
+    function loginth() {
+      const flag = require();
+      if (flag) {
+        fetch('/login', {
+            method: 'POST',
+            body: new URLSearchParams(new FormData(document.forms['login']))
+          })
+          .then(Response => Response.json())
+          .then(data => {
+            if (data.status != undefined) {
+              if (data.status==1) {
+                document.cookie="token="+data.jwt;
+                console.log(document.cookie)
+                console.log("token="+data.jwt)
+                alert(data.msg);
+              window.location.href = '/home';
+              }
+              else{
+                alert('You did not active your Account!!')
+              }
+            } else {
+              alert(data.msg);
+              window.location.href = '/';
+            }
+          })
+      } else {
+
+      }
+    }
+  </script>
+</body>
+
+</html>

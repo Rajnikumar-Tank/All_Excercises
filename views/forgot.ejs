@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Forgot Password</title>
+</head>
+
+<body>
+  <form id="forgot" name="forgot">
+    <table>
+      <tr>
+        <td><label for="email">Email Id:</label></td>
+        <td><input type="text" name="email" id="email" placeholder="Your email.."></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p onclick="updatePassword()" class="btn">Generate new password link</p>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <script>
+    function require() {
+      const form = document.forms['forgot'];
+      const input = document.getElementsByTagName('input');
+      for (i in input) {
+        if (!isNaN(i)) {
+          if (input[i].value.trim() == '') {
+            if (input[i].nextElementSibling == null || input[i].value.trim() == '') {
+              if (input[i].nextElementSibling) {
+                input[i].nextElementSibling.remove();
+              }
+              const err = document.createElement('p');
+              err.style.color = 'red'
+              err.append('Please fill this field!')
+              input[i].parentNode.appendChild(err);
+              input[i].focus();
+              return false;
+            }
+          }
+        } else {
+          break;
+        }
+      }
+      return true;
+    }
+    let input = document.getElementsByTagName('input');
+    var flag;
+    for (i in input) {
+      if (!isNaN(i)) {
+        input[i].onchange = () => {
+          if (input[i].value != undefined && input[i].value.trim() != '') {
+            if (input[i].nextElementSibling) {
+              input[i].nextElementSibling.remove();
+            }
+          }
+        }
+      }
+    }
+
+    function updatePassword() {
+      const flag = require();
+      if (flag) {
+
+        fetch('/checkEmail', {
+            body: new URLSearchParams(new FormData(document.getElementById('forgot'))),
+            method: 'POST'
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.msg == 'ok') {
+              document.getElementById('forgot').reset();
+              window.location.href = "/activeLink?email=" + data.email;
+            } else if (data.msg == 'invalid') {
+              alert('Email Id not Valid!!')
+              document.getElementById('forgot').reset();
+            }
+          })
+      }
+    }
+  </script>
+</body>
+
+</html>
