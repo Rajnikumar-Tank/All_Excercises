@@ -148,14 +148,13 @@
                 if (countx == 3) {
                     alert("અભિનંદન X વિજેતા છે!");
                     document.getElementById('Result').innerHTML="અભિનંદન X વિજેતા છે!";
-                    document.getElementById('tic').remove();
-                    resetGame();
+                    // document.getElementById('tic').remove();
+                    // resetGame();
                 }
                 else if(counto == 3) {
                     alert('અભિનંદન O વિજેતા છે!');
                     document.getElementById('Result').innerHTML='અભિનંદન O વિજેતા છે!';
-                    document.getElementById("tic").remove();
-                    resetGame();
+                    // document.getElementById("tic").remove();
                 }
             }
             draw();
@@ -170,7 +169,7 @@
             if(flag){
                 alert("કોઈ જીત્યું નથી");
                 document.getElementById('Result').innerHTML='કોઈ જીત્યું નથી!';
-                document.getElementById("tic").remove();
+                // document.getElementById("tic").remove();
             }
         }
         function resetGame() {
