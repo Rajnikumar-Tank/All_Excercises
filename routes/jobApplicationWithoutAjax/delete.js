@@ -11,7 +11,7 @@ conn.connect((err) => {
         console.log('error:' + err);
     }
     else {
-        console.log('Database for delete connected!!');
+        console.log('Database for delete connected!!'+conn.config.database);
     }
 })
 

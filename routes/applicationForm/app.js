@@ -14,7 +14,7 @@ conn.connect((err) => {
         throw err;
     }
     else {
-        console.log('Database connected!!!');
+        console.log('Database connected!!!'+conn.config.database);
     }
 })
 

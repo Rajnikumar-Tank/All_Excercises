@@ -12,7 +12,7 @@ conn.connect((err) => {
         console.log('error:' + err);
     }
     else {
-        console.log('Database connected!!');
+        console.log('Database connected!!'+conn.config.database);
     }
 })
 function getForUpdate(sql){

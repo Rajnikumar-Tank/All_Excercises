@@ -52,3 +52,28 @@ input:focus{
     outline-color: rgb(174, 166, 165);
     background-color: rgb(255, 255, 255);
 }
+ul {
+    display: flex;
+    list-style-type: none;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+li{
+    background-color: rgb(169, 230, 241);
+    text-align: center;
+    color: white;
+}
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+a:active {
+    background-color: rgb(14, 4, 219);
+    color: rgb(244, 240, 240);
+}
+
+li:hover{
+    color: black;
+    background-color: rgb(255, 255, 255);
+}

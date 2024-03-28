@@ -11,7 +11,7 @@ const conn = mysql.createConnection({
 
 conn.connect((err) => {
     if (err) throw err;
-    console.log("Database connected");
+    console.log("Database connected"+conn.config.database);
 })
 
 async function getData(req, res) {

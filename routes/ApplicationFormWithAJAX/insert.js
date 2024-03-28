@@ -11,7 +11,7 @@ conn.connect((err) => {
         console.log('error:' + err);
     }
     else {
-        console.log('Database connected for Insert!!');
+        console.log('Database connected for Insert!!'+conn.config.database);
     }
 })
 function insert(sql, data){

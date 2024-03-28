@@ -49,7 +49,7 @@ conn.connect((err) => {
         console.log(err)
     }
     else {
-        console.log('Database connected!!')
+        console.log('Database connected!!'+conn.config.database)
     }
 })
 app.get('/signup', (req, res) => {
