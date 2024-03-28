@@ -1,0 +1,122 @@
+<fieldset>
+  <legend>Basic details</legend>
+  <table>
+    <% var code = code || null %>
+    <tr>
+      <th>First Name</th>
+      <td><input type="text" name="fname" size="40" maxlength="40" value="<%=code=='update'?result1.firstName:'' %>" placeholder="ex:Rajnikumar" id="fname" autofocus /></td>
+    </tr>
+    <tr>
+      <th>Last Name</th>
+      <td><input type="text" name="lname" value="<%= code=='update'?result1.lastName:''%>" placeholder="ex:Tank" size="40" id="lname" /></td>
+    </tr>
+    <tr>
+      <th>Designation</th>
+      <td><input type="text" name="Designation1" id="Designation1" value="<%=code=='update'?result1.Designation:''%>" size="40" id="Designation" placeholder="ex:Developer" spellcheck="true" /></td>
+    </tr>
+    <tr>
+      <th>Email Id</th>
+      <td><input type="text" name="email" value="<%=code=='update'?result1.emailId:''%>" placeholder="example@gmail.com" size="40" id="email" autocomplete></td>
+    </tr>
+    <tr>
+
+      <th>Phone Number</th>
+      <td><input type="text" size="40" value="<%=code=='update'?result1.phone:''%>" name="Phone" id="Phone" minlength="10" maxlength="10" placeholder="ex:9089328323"></td>
+    </tr>
+    <tr>
+      <th>Date Of Birth </th>
+      <% if(code == 'update'){ var dob=new Date(result1.dateOfBirth) }%>
+      <td><input type="text" name="dob" id="dob" value="<%=code=='update'? dob.getDate()+"/"+ (parseInt(dob.getMonth())+1)  +"/"+ dob.getFullYear():''%>" size="40" placeholder="DD/MM/YYYY"></td>
+    </tr>
+    <tr>
+      <th>Address1</th>
+      <td><textarea name="Address1" id="Address1" size="40" cols="40" rows="05" minlength="5" maxlength="300"><%=code=='update'?result1.address1:''%></textarea></td>
+    </tr>
+    <tr>
+      <th>Address2</th>
+      <td><textarea name="Address2" id="Address2" size="40" cols="40" rows="05" maxlength="300"><%=code=='update'?result1.address2:''%></textarea></td>
+    </tr>
+    <tr>
+      <tr>
+        <th>State</th>
+        <td><select name="State" id="State" onchange="changeState();" tabindex="0">
+            <option value="" disabled `<% if(code !='update'){ %>` selected `<% } %>`> Select State </option>
+          </select>
+        </td>
+      </tr>
+      <th>City</th>
+      <td><select name="city" id="City" tabindex="0">
+          <option value="" disabled `<% if(code !='update'){ %>` selected `<% } %>`> Select City </option>
+        </select></td>
+    </tr>
+    <tr>
+      <th>Zip Code</th>
+      <td><input type="text" size="40" name="zcode" id="zcode" value="<%=code=='update'?result1.zipCode:''%>" placeholder="ex.:390232">
+      </td>
+    </tr>
+    <% var result=result || null%>
+    <% if (result) { %>
+    <tr>
+      <th><label for="">Gender:</label></th>
+      <td><% for(record of result){ %><% if(record.selectName=='gender' && record.selectType == 'radio'){ %><input type="<%= record.selectType %>" name="<%= record.selectName %>" id="<%= record.selectName %>" value="<%= record.optionKey %>" `<% if(code == 'update' && result1.gender ==  record.optionKey ){ %>` checked `<%}%>`> <%= record.optionValue %> <% } %> <%}%>
+    </td>
+    </tr>
+    <tr>
+        <th><label for="">Relationship status:</label></th>
+        <td>    <select name='relation' id="relation">
+                <option value="" selected disabled>Select relationship status</option>
+                <% for(record of result){ %> <% if(record.selectType == 'select' && record.selectName == 'relation'){ %> <option id="" value="<%= record.optionKey %>" `<% if(code == 'update' && result1.relationshipStatus ==  record.optionKey ){ %>` selected `<%}%>` > <%= record.optionValue %> </option>
+        <%}%>
+                <%}%>
+        </select>
+      </td>
+    </tr>
+    <% } %>
+
+    <script>
+      // fetch('http://localhost:3000/getState').then(response=>response.json()).then(json=> console.log(json))
+      const getState = async () => {
+        const response = await fetch('/ApplicationFormWithAJAX/getState').catch((err) => {
+          console.log('Error:' + err)
+        });
+        const state = await response.json();
+
+        const result = state.result
+        let listState = document.getElementById('State');
+        var options = `<option value="" disabled selected> Select State </option>`;
+        for (i in result) {
+
+          let option = `<option value='${result[i].name}' <% if(code == 'update'){ %>`;
+          if (`<%= result1.state %>` == result[i].name) {
+            option += `selected`;
+          }
+          option += `<% }  %>> ${result[i].name} </option>`
+          options += option;
+        }
+        listState.innerHTML = options;
+        changeState()
+      }
+      getState();
+      async function changeState() {
+        let listState = document.getElementById('State');
+        let state = listState.value;
+        const response = await fetch("/ApplicationFormWithAJAX/getCity/" + state);
+        const city = await response.json();
+        let cityCombo = document.getElementById('City');
+        var options = `<option value="" disabled selected> Select City </option>`;
+        for (i in city.sort((a, b) => a.city_name > b.city_name)) {
+          let option = `<option value='${city[i].city_name}'<% if(code == 'update'){ %>`
+          if (`<%= result1.city %>` == city[i].city_name) {
+            option += `selected`
+          }
+          option += `<% } %> > ${city[i].city_name} </option>`
+          options += option;
+        }
+
+        cityCombo.innerHTML = options;
+        // console.log(cityCombo);
+      }
+    </script>
+    
+  </table>
+</fieldset>

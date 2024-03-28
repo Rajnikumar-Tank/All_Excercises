@@ -1,0 +1,36 @@
+<fieldset>
+  <legend>Referance Contact</legend>
+  <% var code = code || null %>
+  <table>
+    <tbody id="references">
+      <%if(code=='update'){ %> 
+        <tr>
+            <td><a id="plus">+</a></td>
+        <td><a id="minus">-</a></td>
+        </tr>
+        <% for(i in result6){%>
+
+      <tr>
+        <td>Name</td>
+        <td><input type="text" name="name[]" maxlength="40" value="<%= code=='update'?result6[i].name:'' %>"></td>
+        <td>contact Number</td>
+        <td><input type="text" name="refrePhone[]" value="<%= code=='update'?result6[i].contactNumber:'' %>"></td>
+        <td>Relation</td>
+        <td><input type="text" name="Relation[]" value="<%= code=='update'?result6[i].relation:'' %>"></td>
+      <tr>
+        <%} }else{%>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" name="name[]" maxlength="40"></td>
+        <td>contact Number</td>
+        <td><input type="text" name="refrePhone[]"></td>
+        <td>Relation</td>
+        <td><input type="text" name="Relation[]"></td>
+        <td><a id="plus">+</a></td>
+        <td><a id="minus">-</a></td>
+      </tr>
+      <%}%>
+        </tbody>
+    </table>
+    <script src="/increaseDecreaseReferance.js"></script>
+</fieldset>

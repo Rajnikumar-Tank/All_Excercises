@@ -1,0 +1,114 @@
+<div class="form">
+  <div class="component">
+    <h1>Welcome to Job Application Form</h1>
+    <form action="/insert" method="post" name="jobApp" onsubmit="return validation();">
+
+      <% var code = code || null %>
+      <% if(code=='update'){%>
+      <input type="hidden" name="hidden" id="hidden" value="<%=result1.AplicantId%>">
+      <%}%>
+      <div class="next" id="1">
+        <%- include('./basicDetails') %>
+  </div>
+  <div class="next" id="2">
+    <%- include('./education') %>
+  </div>
+  <div class="next" id="3">
+    <%- include('./workExperience') %>
+  </div>
+  <div class="next" id="4">
+    <%- include('./language') %>
+  </div>
+  <div class="next" id="5">
+    <%- include('./technologies') %>
+  </div>
+  <div class="next" id="6">
+    <%- include('./references') %>
+  </div>
+  <div class="next" id="7">
+    <%- include('./preferences') %>
+  </div>
+  <div class="formFoot">
+    <span class="btn" id="prev">Previous</span>
+    <span class="btn" id="next">Next</span>
+  </div>
+  </form>
+</div>
+</div>
+
+<script>
+  var tab = document.getElementsByClassName('next');
+  tab[0].style.display = 'block';
+  var count = 0
+  next.onclick = () => {
+    if(next.innerText=='Submit'){
+      submitForm();
+    }
+    if(count >= 6) {
+      return;
+    }
+    if(validation[count]()){
+      count++;
+    }
+    else{
+      return;
+    }
+    for (i in tab) {
+      if (isNaN(i)) {
+        break
+      }
+      if (i == count) {
+        tab[i].style.display = 'block';
+      } else {
+        tab[i].style.display = 'none';
+      }
+    }
+    if(count == 6){
+      next.innerText='Submit';
+    }
+    if(count >0){
+      prev.style.display='block'
+    }
+  }
+  
+  prev.onclick = () => {
+    console.log(new URLSearchParams( new FormData(document.forms['jobApp'])));
+    if(count<=0){
+      return;
+    }
+    
+    if(count==6){
+      next.innerText='Next';
+    }
+    count--;
+    if(count==0){
+    prev.style.display='none';
+  }
+    for (i in tab) {
+      if (isNaN(i)) {
+        break;
+      }
+      if (i == count) {
+        tab[i].style.display = 'block';
+      } else {
+        tab[i].style.display = 'none';
+      }
+    }
+  }
+  if(count==0){
+    prev.style.display='none';
+  }
+  async function submitForm(){
+    const response= await fetch('/ApplicationFormWithAJAX/insert',{
+      method:'POST',
+      body:new URLSearchParams( new FormData(document.forms['jobApp'])),
+      redirect:'manual',
+    })
+    const data= await response.json();
+  
+    alert(data);
+    if(data.indexOf('Successfully')){
+      window.location.href='/ApplicationFormWithAJAX/';
+    }
+  }
+</script>

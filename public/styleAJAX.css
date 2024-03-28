@@ -1,0 +1,114 @@
+.next{
+    display: none;
+}
+.btn{
+    text-decoration: none;
+    background-color: rgb(12, 12, 13);
+    color: azure;
+    width: 100px  ;
+    cursor: pointer;
+    padding: 20px 20px;
+    text-align: center;
+    margin: 20px ;
+}
+.btn:hover{
+    background-color: black;
+    color: azure;
+}
+.btn:active{
+    background-color: blueviolet;
+    color:aquamarine
+}
+.req::after{
+    content: "*This data is require!!";
+    color: orangered;
+    font-size: 20px;
+}
+.invalid ::after{
+    content: "*invalid Input!!";
+    color: red;
+    font-size: 12px;
+}
+input ~span{
+    color:red;
+}
+
+#references a{
+    font-size: large;
+    background-color: rgb(2, 2, 2);
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+}
+#references a:hover{
+    background-color: aqua;
+    color: black;
+}
+
+#experience a{
+    cursor: pointer;
+    font-size: large;
+    background-color: rgb(2, 2, 2);
+    color: white;
+    padding: 5px;
+}
+#experience a:hover{
+    background-color: aqua;
+    color: black;
+}
+input[type=text],select,textarea{
+    font-size: 17px;
+    border: 3px solid rgb(174, 166, 165);
+    outline-style: none;
+    padding: 12px 8px;
+    margin: 8px 0;
+    width: 90%;
+    background-color: rgb(207, 200, 200);
+    border-radius: 4px;
+}
+input:focus,select:focus,textarea:focus{
+    /* border: 2px solid blue; */
+    border: 3px solid grey ;
+    outline-color: rgb(174, 166, 165);
+    background-color: rgb(255, 255, 255);
+}
+table{
+    width:100%;
+}
+.formFoot{
+    display: flex;
+    justify-content: space-between;
+}
+#display{
+    border-collapse: collapse;
+}
+#display tr:nth-child(even){
+    background-color: rgb(201, 195, 195);
+    height: 50px;
+}
+#display tr:nth-child(odd){
+    background-color: rgb(93, 89, 89);
+    height: 50px;
+    color: white;
+}
+th{
+    background-color: darkgrey;
+    height: 50px;
+    border-radius: 5px;
+    color:black
+}
+
+fieldset{
+    background-color: rgba(0, 0, 0, 0.127);
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 15px;
+
+}
+legend{
+    font-size: 40px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+}

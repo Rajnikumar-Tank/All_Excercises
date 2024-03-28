@@ -29,6 +29,7 @@ const dynamicTable=require('./routes/DynamicTable/app.js')
 const delemiterSearch=require('./routes/delemiterSearch/app.js')
 const jsonPlaceHolder=require('./routes/jsonPlaceHolder/app.js')
 const jobApplicationWithoutAjax=require('./routes/jobApplicationWithoutAjax/app.js')
+const ApplicationFormWithAJAX=require('./routes/ApplicationFormWithAJAX/app.js')
 app.use('/applicationForm',authoriseToken,applicationForm)
 app.use('/paginationGrid',authoriseToken,paginationGrid)
 app.use('/studentDetails',authoriseToken,studentDetails)
@@ -36,6 +37,7 @@ app.use('/dynamicGrid',authoriseToken,dynamicTable)
 app.use('/delemiterSearch',authoriseToken,delemiterSearch)
 app.use('/jsonPlaceHolder',authoriseToken,jsonPlaceHolder)
 app.use('/jobApplicationWithoutAjax',authoriseToken,jobApplicationWithoutAjax)
+app.use('/ApplicationFormWithAJAX',authoriseToken,ApplicationFormWithAJAX)
 const conn = mysql.createConnection({
     database: 'userData',
     host: 'localhost',

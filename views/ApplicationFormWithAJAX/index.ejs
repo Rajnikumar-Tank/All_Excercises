@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styleAJAX.css">
+  <title>Job Application</title>
+</head>
+
+<body>
+  <h1>Rajnikumar Tank</h1>
+  <%var result=result || null %>
+  <%if(result){%>
+  <%- include('form.ejs') %>
+  <%}
+        else{%>
+  <a href="/ApplicationFormWithAJAX/insert" class="btn">New Application Form</a>
+  <a href="/ApplicationFormWithAJAX/record" class="btn">Records</a>
+  <%}%>
+            <script src="/validationAJAX.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js "></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css " rel="stylesheet">  
+</body>
+
+</html>
