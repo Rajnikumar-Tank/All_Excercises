@@ -196,7 +196,7 @@ function authoriseToken(req,res,next){
         req.email=data.email;
         next();                     
     } catch (error) {
-        res.render('login',{msg:"Session Expired.."})
+        res.redirect('/')
     }
 }
 app.get('/home',authoriseToken,(req,res)=>{
