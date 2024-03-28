@@ -84,7 +84,7 @@ app.post('/signup', async (req, res) => {
     else {
         let sql = "insert into user_registrations(first_name,last_name,email_id,salt,activation_token,password) values('" + data.firstName + "','" + data.lastName + "','" + data.email + "','" + salt + "','" + token + "','" + pwd + "');";
         let result = await executeDML(sql);
-        console.log(result)
+        // console.log(result)
         res.json({ id: result.insertId, token: token })
     }
 })
@@ -185,10 +185,10 @@ app.post('/login', async (req, res) => {
 })
 function authoriseToken(req,res,next){
     let token = req.cookies.token;
-    console.log(token);
-    console.log(req.cookies.token);
+    // console.log(token);
+    // console.log(req.cookies.token);
     if(!token){
-        res.render('login',{msg:"Access Denied!!"});
+        res.redirect('/');
         return;
     }
     try {
@@ -196,6 +196,7 @@ function authoriseToken(req,res,next){
         req.email=data.email;
         next();                     
     } catch (error) {
+        console.log(error);
         res.redirect('/')
     }
 }
@@ -209,6 +210,16 @@ app.get('/dynamicTable', authoriseToken,(req,res)=>{
 
 app.get('/kukukube', authoriseToken,(req,res)=>{
     res.render('kukukube/kukukube')
+})
+
+app.get('/htmlTemplate1',authoriseToken,(req,res)=>{
+    res.sendFile(__dirname+'/htmlTemplate/ehya/ehya.html')
+})
+app.get('/htmlTemplate2',authoriseToken,(req,res)=>{
+    res.sendFile(__dirname+'/htmlTemplate/awanHoster/awanHoster.html')
+})
+app.get('/htmlTemplate3',authoriseToken,(req,res)=>{
+    res.sendFile(__dirname+'/htmlTemplate/hirex/hirex.html')
 })
 
 app.get('/tictactoe', authoriseToken,(req,res)=>{
