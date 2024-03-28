@@ -1,0 +1,25 @@
+<fieldset>
+  <legend>Language Known</legend>
+  <% var code = code || null %>
+
+  <table>
+    <% var result=result || null %>
+    <% if(result){ %>
+    
+      <th><label for=""> Languages:</label></th>
+      <% for(record of result){ %>
+      <% if(record.selectType == 'checkbox' && record.selectName == 'language'){ %>
+    <tr>
+      <td><input type="<%= record.selectType %>" name="<%= record.selectName %>[]" id="" value="<%= record.optionKey %>" `<%if(code== 'update'){for(i in result4){ if((result4[i].language).toLowerCase()==record.optionKey){ %>` checked `<%}}}%>`> <%= record.optionValue %></td>
+      <td><input type="checkbox" name="<%= record.optionKey %>[]" id="<%= record.optionKey %>1" value="read<%= record.optionValue %>" 
+        `<%if(code=='update' ){for(i in result4){if(record.optionKey== (result4[i].language).toLowerCase() && result4[i].isRead >0){%>` checked `<%}}}else {%>`
+         disabled `<%}%>`>Read</td>
+      <td><input type="checkbox" name="<%= record.optionKey %>[]" id="<%= record.optionKey %>2" value="write<%= record.optionValue %>" `<%if(code=='update' ){ for(i in result4){ if(record.optionKey == (result4[i].language).toLowerCase() && result4[i].isWrite > 0){%>` checked  `<%}}}else {%>`
+         disabled `<%} %>`>Write</td>
+      <td><input type="checkbox" name="<%= record.optionKey %>[]" id="<%= record.optionKey %>3" value="Speak<%= record.optionValue %>" `<% if(code=='update' ){for(i in result4){if( record.optionKey == (result4[i].language).toLowerCase() && result4[i].isSpeak > 0){%>` checked  `<%}}}else {%>` disabled `<%}%>`>Speak</td>
+    </tr>
+    <%} %>
+    <% } %>
+<% } %>
+  </table>
+</fieldset>

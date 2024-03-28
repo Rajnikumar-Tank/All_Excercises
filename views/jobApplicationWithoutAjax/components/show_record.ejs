@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>All Records</title>
+</head>
+<body>
+    <h1>All Aplication Record</h1>
+    <table id="display" border="1">
+        
+    </table>
+    <script>
+        async function get_all_record(){
+            console.log("here")
+            const response= await fetch('/jobApplicationWithoutAjax/display');
+            const data=await response.json();
+            console.log(data);
+            const table=document.getElementById('display');
+            var str="<tr>";
+            for(key in data[0]){
+                str+="<th>"+key.toUpperCase()+"</th>";
+            }
+            str+="<th>Action</th>"
+            str+="</tr>";
+            for(record of data){
+            str+='<tr>';
+                for(key in record){
+                    str+='<td>'+record[key]+'</td>'
+                }
+                str+="<td><a href='/jobApplicationWithoutAjax/update?id="+ record['AplicantId'] +"'>UPDATE</a></td>"
+                str+='</tr>'    
+            }
+            table.innerHTML=str;   
+        }
+        get_all_record();
+    </script>
+</body>
+</html>

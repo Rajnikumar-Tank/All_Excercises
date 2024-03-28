@@ -1,0 +1,25 @@
+<fieldset>
+  <legend>Technologies you Know</legend>
+  <table>
+    <% var code = code || null %>
+
+    <% var result=result || null %>
+    <% if(result){ %>
+
+    <th><label for=""> Technologies:</label></th>
+    <% for(record of result){  %>
+    <% if(record.selectType == 'checkbox' && record.selectName == 'technologies'){ %>
+    <tr>
+      <td><input type="checkbox" name="<%= record.selectName %>[]" id="" value="<%= record.optionKey %>"`<%  if(code== 'update'){ for(i in result5){  if((result5[i].technology).toLowerCase()==record.optionKey.toLowerCase()){ %>` checked `<%}}}%>`><%= record.optionValue %></td>
+      <td><input type="radio" name="<%= record.optionKey %>" id="<%= record.optionKey %>1" value="Beginer<%= record.optionValue %>" `<%if(code=='update' ){ for(i in result5){if(record.optionKey.toLowerCase() == (result5[i].technology).toLowerCase() && result5[i].isBeginner > 0){%>` checked  `<% }}}else {%>`
+        disabled `<%} %>`>Beginer</td>
+      <td><input type="radio" name="<%= record.optionKey %>" id="<%= record.optionKey %>2" value="Mideater<%= record.optionValue %>" `<%if(code=='update' ){for(i in result5){ if(record.optionKey.toLowerCase() == (result5[i].technology).toLowerCase() && result5[i].isMidiater > 0){%>` checked  `<%}}}else {%>`
+        disabled `<%} %>`>Mideater</td>
+      <td><input type="radio" name="<%= record.optionKey %>" id="<%= record.optionKey %>3" value="Expert<%= record.optionValue %>" `<%if(code=='update' ){ for(i in result5){ console.log(record.optionKey.toLowerCase()+ "="+ (result5[i].technology).toLowerCase()); if(record.optionKey.toLowerCase() == (result5[i].technology).toLowerCase() && result5[i].isExpert > 0){%>` checked  `<%}}}else {%>`
+        disabled `<%} %>`>Expert</td>
+    </tr>
+    <%}%>
+            <% } %>
+    <% } %>
+  </table>
+</fieldset>

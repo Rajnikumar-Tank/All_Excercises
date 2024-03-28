@@ -1,0 +1,21 @@
+<div class="form">
+  <div class="component">
+    <h1>Welcome to Job Application Form</h1>
+    <form action="/jobApplicationWithoutAjax/insert" method="post" name="jobApp" onsubmit="return validation();">
+
+      <% var code = code || null %>
+      <% if(code=='update'){%>
+        <input type="hidden" name="hidden" id="hidden" value="<%=result1.AplicantId%>">
+      <%}%>
+      <%- include('./basicDetails') %>
+      <%- include('./education') %>
+      <%- include('./workExperience') %>
+      <%- include('./language') %>
+      <%- include('./technologies') %>
+      <%- include('./references') %>
+      <%- include('./preferences') %>
+
+      <input type="Submit" value="Submit Application">
+    </form>
+  </div>
+</div>

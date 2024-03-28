@@ -1,0 +1,82 @@
+<fieldset>
+  <legend>Basic details</legend>
+  <table>
+    <% var code = code || null %>
+    <tr>
+      <th>First Name</th>
+      <td><input type="text" name="fname" size="40" maxlength="40" value="<%=code=='update'?result1.firstName:'' %>" placeholder="ex:Rajnikumar" id="fname" autofocus /></td>
+    </tr>
+    <tr>
+      <th>Last Name</th>
+      <td><input type="text" name="lname" value="<%= code=='update'?result1.lastName:''%>" placeholder="ex:Tank" size="40" id="lname" /></td>
+    </tr>
+    <tr>
+      <th>Designation</th>
+      <td><input type="text" name="Designation1" id="Designation1" value="<%=code=='update'?result1.Designation:''%>" size="40" id="Designation" placeholder="ex:Developer" spellcheck="true" /></td>
+    </tr>
+    <tr>
+      <th>Email Id</th>
+      <td><input type="text" name="email" value="<%=code=='update'?result1.emailId:''%>" placeholder="example@gmail.com" size="40" id="email" autocomplete></td>
+    </tr>
+    <tr>
+
+      <th>Phone Number</th>
+      <td><input type="text" size="40" value="<%=code=='update'?result1.phone:''%>" name="Phone" id="Phone" minlength="10" maxlength="10" placeholder="ex:9089328323"></td>
+    </tr>
+    <tr>
+      <th>Date Of Birth </th>
+      <% if(code == 'update'){ var dob=new Date(result1.dateOfBirth) }%>
+      <td><input type="text" name="dob" id="dob" value="<%=code=='update'? dob.getDate()+"/"+ (parseInt(dob.getMonth())+1)  +"/"+ dob.getFullYear():''%>" size="40" placeholder="DD/MM/YYYY"></td>
+    </tr>
+    <tr>
+      <th>Address1</th>
+      <td><textarea name="Address1" id="Address1" size="40" cols="40" rows="05" minlength="5" maxlength="300"><%=code=='update'?result1.address1:''%></textarea></td>
+    </tr>
+    <tr>
+      <th>Address2</th>
+      <td><textarea name="Address2" id="Address2" size="40" cols="40" rows="05" maxlength="300"><%=code=='update'?result1.address2:''%></textarea></td>
+    </tr>
+    <tr>
+      <th>City</th>
+      <td><input type="text" name="City" value="<%=code=='update'?result1.city:''%>" size="40" id="City" autocomplete placeholder="ex.:Surat"></td>
+    </tr>
+    <tr>
+      <th>State</th>
+      <td><select name="State" id="State">
+          <option value="" disabled `<% if(code !='update'){ %>` selected `<% } %>`>Select</option>
+          <option value="Gujarat" `<% if(code=='update' && result1.state == 'Gujarat'){ %>` selected `<% } %>`>Gujarat</option>
+          <option value="Maharashtra" `<% if(code=='update' && result1.state == 'Maharashtra'){ %>` selected `<% } %>`>Maharashtra</option>
+          <option value="Rajsthan" `<% if(code=='update' && result1.state == 'Rajsthan'){ %>` selected `<%} %>`>Rajsthan</option>
+          <option value="MadhyaPradesh" `<% if( code=='update' && result1.state == 'MadhyaPradesh'){ %>` selected `<%} %>`>Madhya Pradesh</option>
+          <option value="Manipur" `<% if( code=='update' && result1.state == 'Manipur'){ %>` selected `<%}%>`>Manipur</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Zip Code</th>
+      <td><input type="text" size="40" name="zcode" id="zcode" value="<%=code=='update'?result1.zipCode:''%>" placeholder="ex.:390232">
+      </td>
+    </tr>
+    <% var result=result || null%>
+    <% if (result) { %>
+    <tr>
+      <th><label for="">Gender:</label></th>
+      <td><% for(record of result){ %><% if(record.selectName=='gender' && record.selectType == 'radio'){ %><input type="<%= record.selectType %>" name="<%= record.selectName %>" id="<%= record.selectName %>" value="<%= record.optionKey %>" `<% if(code == 'update' && result1.gender ==  record.optionKey ){ %>` checked `<%}%>`> <%= record.optionValue %>
+        <% } %>
+        <%}%>
+    </td>
+    </tr>
+    <tr>
+        <th><label for="">Relationship status:</label></th>
+        <td>    <select name='relation' id="relation">
+                <% for(record of result){ %>
+        <% if(record.selectType == 'select' && record.selectName == 'relation'){ %>
+        <option id="" value="<%= record.optionKey %>" `<% if(code == 'update' && result1.relationshipStatus ==  record.optionKey ){ %>` selected `<%}%>` > <%= record.optionValue %> </option>
+        <%}%>
+                <%}%>
+        </select>
+      </td>
+    </tr>
+    <% } %>
+  </table>
+</fieldset>
