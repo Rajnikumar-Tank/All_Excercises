@@ -1,28 +1,13 @@
-const express=require('express')
-const router=express.Router();
-const mysql=require('mysql');
 
-const conn = mysql.createConnection({
-    host: 'localhost',
-    user: "root",
-    password: 'root',
-    database: 'userDatabase'
-})
+const conn=require('../connection.js')
 
-conn.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    else {
-        console.log('Database connected!!!'+conn.config.database);
-    }
-})
-
-router.get('/', (req, res) => {
+// router.get('/', (req, res) => {
+const applicationFormHome= (req, res) => {
     res.render("ApplicationForm/index.ejs", { title: 'home' });
-})
+}
 
-router.post('/getData', (req, res) => {
+// router.post('/getData', (req, res) => {
+const applicationFormGetData=(req, res) => {
     const user = req.body;
     sql = `
         insert into usersDetails(firstname ,lastname,age,phone,emailId ,gender,hobbies,address)
@@ -35,8 +20,9 @@ router.post('/getData', (req, res) => {
             console.log('User Inserted!!!');
         }
     })
-})
-router.get('/alluser', (req, res) => {
+}
+// router.get('/alluser', (req, res) => {
+const applicationFormAllUser =(req, res) => {
     const sql="Select * from usersDetails;"
     conn.query(sql,(err,result)=>{
         if(err) {
@@ -61,9 +47,10 @@ router.get('/alluser', (req, res) => {
         }
     })
     
-})
-router.get('/oneUser', (req, res) => {
-   
+}
+
+// router.get('/oneUser', (req, res) => {
+const applicationFormOneUser =(req, res) => {
     userId = req.query.userId;
     var user1 = {};
     sql='select * from usersDetails where userId='+userId+";";
@@ -85,6 +72,6 @@ router.get('/oneUser', (req, res) => {
         // console.log(user1);
         res.render('ApplicationForm/oneUser.ejs', { user1 })
     })
-})
+}
 
-module.exports=router
+module.exports={applicationFormAllUser,applicationFormGetData,applicationFormHome,applicationFormOneUser}

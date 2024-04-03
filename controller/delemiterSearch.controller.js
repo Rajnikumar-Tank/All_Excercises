@@ -1,30 +1,22 @@
-const express = require('express');
-const mysql = require('mysql');
-const router = express.Router();
-const conn = mysql.createConnection({
-    host: "localhost",
-    user: 'root',
-    password: 'root',
-    database: 'stud5march'
-})
-conn.connect((err) => {
-    if (err) {
-        console.error("Database Error:" + err);
-    }
-})
 
-router.get('/', (req, res) => {
-    var sql = "Select * from studentMaster;";
+const conn=require('../connection.js')
+
+
+// router.get('/', (req, res) => {
+const delemiterSearchHome=(req, res) => {
+    var sql = "Select * from studentsMaster;";
     var search = ""
     conn.query(sql, (err, result) => {
         if (err) {
             console.error("sql error:" + err)
         }
+        console.log(result);
         res.render('delemiterSearch/index', { result, search })
     })
-})
+}
 
-router.get('/search', (req, res) => {
+// router.get('/search', (req, res) => {
+const delemiterSearchSearch= (req, res) => {
     var searchString = req.query.search;
     var sql;
     console.log(searchString.search('%'))
@@ -81,7 +73,7 @@ router.get('/search', (req, res) => {
         if (city.length) var ex6 = city.filter(e => e.length).map(e => "city like '%" + e + "%'").join(' or ');
         console.log(ex5);
         let claus = [ex1, ex2, ex3, ex4, ex5, ex6].filter(l => l != undefined).map(e => "(" + e + ")").join(' and ');
-        let sqlP = "select * from studentMaster ";
+        let sqlP = "select * from studentsMaster ";
         var extend;
         if (claus.length > 0) {
             extend = ` where ${claus}`;
@@ -99,14 +91,15 @@ router.get('/search', (req, res) => {
         })
     }
     else {
-        sql = 'select * from studentMaster;'
+        sql = 'select * from studentsMaster;'
         conn.query(sql, (err, result) => {
             if (err) {
                 console.log('sql Err: ' + err)
             }
+            console.log(result);
             res.render('delemiterSearch/index', { result, search: searchString })
         })
     }
-})
+}
 
-module.exports = router
+module.exports = {delemiterSearchHome,delemiterSearchSearch}

@@ -1,18 +1,7 @@
 const { render } = require('ejs');
-const mysql = require('mysql');
 var order = 1
 var orderBy = "Asc"
-const conn = mysql.createConnection({
-    user: 'root',
-    host: "localhost",
-    password: "root",
-    database: "studentDB26Feb"
-});
-
-conn.connect((err) => {
-    if (err) throw err;
-    console.log("Database connected"+conn.config.database);
-})
+const conn=require('../connection.js')
 
 async function getData(req, res) {
     var totalRecord;

@@ -1,18 +1,9 @@
-const express = require('express');
-const mysql = require('mysql');
 
-const router=express.Router();
 
-const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: "root",
-    database: "studDb27Feb"
-})
-conn.connect((err) => {
-    if (err) console.error('Database not connected:' + err);
-})
-router.get('/', (req, res) => {
+const conn = require('../connection.js')
+
+// router.get('/', (req, res) => {
+const studentDetailsHome = (req, res) => {
     var page = "0";
 
     if (req.query.page == "" || !req.query.page) {
@@ -43,17 +34,19 @@ router.get('/', (req, res) => {
         })
         res.render('studentDetails/index', { details: data, thisPage: page, totalRecord, month });
     })
-})
-router.get('/clickForSearch', (req, res) => {
+}
+// router.get('/clickForSearch', (req, res) => {
+const studentDetailsClickForSearch = (req, res) => {
     res.render('studentDetails/attendence4march');
-})
-router.get('/attendence4march', (req, res) => {
+}
+// router.get('/attendence4march', (req, res) => {
+const studentDetailsAttendence4march = (req, res) => {
     var page = "0";
     var studId = req.query.studId;
     var name = req.query.name;
     var days = req.query.days;
-    var startRange=req.query.startRange;
-    var endRange=req.query.endRange;
+    var startRange = req.query.startRange;
+    var endRange = req.query.endRange;
     // console.log(name)
     var sql;
 
@@ -71,13 +64,13 @@ router.get('/attendence4march', (req, res) => {
     }
     else if (name) {
         sql = "select studentMaster.studId,studentMaster.name,count(isAttend) as presentDays from attendence,studentMaster  where studentMaster.studId=attendence.studId and attendence.isAttend='p'  and studentMaster.name like '%" + name + "%' group by attendence.studId;";
-        
+
     }
-    else if(days){
-        sql = "select studentMaster.studId,studentMaster.name,count(isAttend) as presentDays from attendence,studentMaster  where studentMaster.studId=attendence.studId and attendence.isAttend='p'  group by attendence.studId having presentDays='"+ days+"';";
+    else if (days) {
+        sql = "select studentMaster.studId,studentMaster.name,count(isAttend) as presentDays from attendence,studentMaster  where studentMaster.studId=attendence.studId and attendence.isAttend='p'  group by attendence.studId having presentDays='" + days + "';";
     }
-    else if(startRange && endRange){
-        sql = "select studentMaster.studId,studentMaster.name,count(isAttend) as presentDays, ((count(isAttend)/91)*100) as parcentage  from attendence,studentMaster  where studentMaster.studId=attendence.studId and attendence.isAttend='p' group by attendence.studId having parcentage between '"+ startRange+"' and  '"+ endRange +"' ;";
+    else if (startRange && endRange) {
+        sql = "select studentMaster.studId,studentMaster.name,count(isAttend) as presentDays, ((count(isAttend)/91)*100) as parcentage  from attendence,studentMaster  where studentMaster.studId=attendence.studId and attendence.isAttend='p' group by attendence.studId having parcentage between '" + startRange + "' and  '" + endRange + "' ;";
     }
     console.log(sql);
     conn.query(sql, (err, data) => {
@@ -97,29 +90,32 @@ router.get('/attendence4march', (req, res) => {
         })
         res.render('studentDetails/attendence4march', { details: data, thisPage: page, totalRecord, month });
     })
-})
+}
 
 
-router.get('/result', (req, res) => {
+// router.get('/result', (req, res) => {
+const studentDetailsResult = (req, res) => {
 
     var sql = "select r.studId,s.name,sum(r.obtainPrecticalMarks) as pp,sum(r.obtainTheoryMarks)pt from result r,studentMaster s where s.studId=r.studId and examId= ? group by r.studId";
     conn.query(sql, 2, (err, prelims) => {
         if (err) console.error("Error:" + err);
-        
+
         conn.query(sql, 1, (err, terminalData) => {
             if (err) console.error("Error:" + err);
-           
+
             conn.query(sql, 3, (err, final) => {
                 if (err) console.error('ErrorF:' + err);
                 res.render('studentDetails/result', { prelims, terminalData, final });
             })
         })
     })
-})
-router.get('/resultFind', (req, res) => {
+}
+// router.get('/resultFind', (req, res) => {
+const studentDetailsResultFind = (req, res) => {
     res.render('studentDetails/resultSearchView')
-})
-router.get('/resultSearch', (req, res) => {
+}
+// router.get('/resultSearch', (req, res) => {
+const studentDetailsResultSearch = (req, res) => {
     var studId = parseInt(req.query.studId);
     var name = req.query.name;
     console.log(studId)
@@ -145,23 +141,24 @@ router.get('/resultSearch', (req, res) => {
         var sql = "select r.studId,s.name,sum(r.obtainPrecticalMarks) as pp,sum(r.obtainTheoryMarks)pt from result r,studentMaster s where s.studId=r.studId and examId= ? and s.name like '%" + name + "%' group by r.studId";
         conn.query(sql, [2], (err, prelims) => {
             if (err) console.error("Error:" + err);
-            
+
             conn.query(sql, [1], (err, terminalData) => {
                 if (err) console.error("Error:" + err);
-               
+
                 conn.query(sql, [3], (err, final) => {
                     if (err) console.error('ErrorF:' + err);
                     console.log(final)
-                    
+
                     res.render('studentDetails/resultSearchView', { prelims, terminalData, final });
                 })
             })
-            
+
         })
     }
-})
+}
 
-router.get('/report', (req, res) => {
+// router.get('/report', (req, res) => {
+const studentDetailsReport = (req, res) => {
     var studId = req.query.studId;
     var StudentName;
     conn.query("select studId,name from studentMaster where studId=" + studId + ";", (err, name) => {
@@ -179,55 +176,57 @@ router.get('/report', (req, res) => {
             })
         })
     })
-})
+}
 
-router.get('/functionalitySearch',(req,res)=>{
+// router.get('/functionalitySearch',(req,res)=>{
+const studentDetailsFunctionalitySearch = (req, res) => {
     var sql;
-    sql="select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId group by r.studId";
-    conn.query(sql,(err,result)=>{
-        if(err){
-            console.log('dataError:'+sql);
+    sql = "select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId group by r.studId";
+    conn.query(sql, (err, result) => {
+        if (err) {
+            console.log('dataError:' + sql);
         }
         console.log(result);
-        res.render('studentDetails/search',{result});
+        res.render('studentDetails/search', { result });
     })
-})
+}
 
-router.get('/search',(req,res)=>{
-    var studId=req.query.id;
-    var name=req.query.name;
-    var gender=req.query.gender;
-    var startPercentage=req.query.startPercentage;
-    var endPercentage=req.query.endPercentage;
+// router.get('/search',(req,res)=>{
+const studentDetailsSearch = (req, res) => {
+    var studId = req.query.id;
+    var name = req.query.name;
+    var gender = req.query.gender;
+    var startPercentage = req.query.startPercentage;
+    var endPercentage = req.query.endPercentage;
     var sql;
-    if( name && gender){
-        gender=gender.substring(0,1);
+    if (name && gender) {
+        gender = gender.substring(0, 1);
 
-        sql="Select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender= 'M' then 'Male' end as gender, sum(r.obtainPrecticalMarks) as practical,sum(r.obtainTheoryMarks) as theory,sum(r.grandTotal) as total,round((sum(r.grandTotal)/12),2) as percentage from studentMaster s ,result r where s.studId=r.studId and name like '%"+name +"%' and gender like '%"+ gender +"%' group by r.studId;"
+        sql = "Select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender= 'M' then 'Male' end as gender, sum(r.obtainPrecticalMarks) as practical,sum(r.obtainTheoryMarks) as theory,sum(r.grandTotal) as total,round((sum(r.grandTotal)/12),2) as percentage from studentMaster s ,result r where s.studId=r.studId and name like '%" + name + "%' and gender like '%" + gender + "%' group by r.studId;"
     }
-    else if(studId){
-        sql="select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId and r.studId IN ("+ studId +") group by r.studId;";
+    else if (studId) {
+        sql = "select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId and r.studId IN (" + studId + ") group by r.studId;";
     }
-    else if(name){
-        sql="select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId and s.name like '%"+ name +"%' group by r.studId;";
+    else if (name) {
+        sql = "select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId and s.name like '%" + name + "%' group by r.studId;";
     }
-    else if(gender){
-        gender=gender.substring(0,1);
-        sql="select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId and s.gender like '%"+ gender +"%' group by r.studId;";
+    else if (gender) {
+        gender = gender.substring(0, 1);
+        sql = "select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId and s.gender like '%" + gender + "%' group by r.studId;";
     }
-    else if(endPercentage && startPercentage){
-        sql="select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId   group by r.studId having percentage between '"+startPercentage + "' and '" + endPercentage +"';";
+    else if (endPercentage && startPercentage) {
+        sql = "select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId   group by r.studId having percentage between '" + startPercentage + "' and '" + endPercentage + "';";
     }
-    else{
-        sql="select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId group by r.studId";
+    else {
+        sql = "select s.studId,s.name,case when s.gender='F' then 'Female' when s.gender='m' or s.gender='M' then 'Male' end as gender,sum(r.obtainPrecticalMarks) as practical, sum(r.obtainTheoryMarks) as theory, sum(r.grandTotal) as total, round(sum(r.grandTotal)/12,2)  as percentage from studentMaster s,result r where s.studId=r.studId group by r.studId";
     }
-    conn.query(sql,(err,result)=>{
-        if(err){
-            console.log("Search problem:"+err)
+    conn.query(sql, (err, result) => {
+        if (err) {
+            console.log("Search problem:" + err)
         }
         console.log(result);
-        res.render('studentDetails/search',{result});
+        res.render('studentDetails/search', { result });
     })
-})
+}
 
-module.exports=router
+module.exports = { studentDetailsAttendence4march, studentDetailsClickForSearch, studentDetailsFunctionalitySearch, studentDetailsHome, studentDetailsReport, studentDetailsResult, studentDetailsResultFind, studentDetailsResultSearch, studentDetailsSearch }

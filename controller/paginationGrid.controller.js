@@ -9,9 +9,10 @@ const port=3001
 const host='localhost'
 
 
-router.get('/',(req,res)=>{
+// router.get('/',(req,res)=>{
+const paginationGridHome= (req,res)=>{
     const students= getStudent(req,res);
     
-})
+}
 
-module.exports=router
+module.exports={paginationGridHome}

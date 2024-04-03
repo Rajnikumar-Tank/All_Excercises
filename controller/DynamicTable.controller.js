@@ -1,19 +1,14 @@
-const express = require('express');
-const mysql = require('mysql');
-const router =express.Router();
 
-const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'studDb27Feb'
-})
-router.get('/', (req, res) => {
+const conn=require('../connection.js')
+
+// router.get('/', (req, res) => {
+const dynamicGridHome= (req, res) => {
     res.render('dynamicGrid/index')
-})
+}
 var page, order = 1;
 var orderType='asc';
-router.post('/query', (req, res) => {
+// router.post('/query', (req, res) => {
+const dynamicGridQueryPost=(req, res) => {
     //console.log('get');
     var rows = 20;
     if (!req.query.page) {
@@ -95,9 +90,10 @@ router.post('/query', (req, res) => {
             })
         }
     })
-})
+}
 
-router.get('/query', (req, res) => {
+// router.get('/query', (req, res) => {
+const dynamicGridQueryGet= (req, res) => {
     //console.log('get');
     // var page;
     // var order;
@@ -221,6 +217,6 @@ router.get('/query', (req, res) => {
     else {
         res.end(' please enter first Query');
     }
-})
+}
 
-module.exports=router
+module.exports={dynamicGridHome,dynamicGridQueryPost,dynamicGridQueryGet}

@@ -1,19 +1,5 @@
-const mysql = require('mysql');
-const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'jobAppDB29'
-})
+const conn=require('../connection.js')
 
-conn.connect((err) => {
-    if (err) {
-        console.log('error:' + err);
-    }
-    else {
-        console.log('Database connected for Insert!!'+conn.config.database);
-    }
-})
 function insert(sql, data){
     // console.log(typeof(data));
     return new Promise((resolve,reject)=>{

@@ -19,9 +19,9 @@
 -- Current Database: `jobAppDB29`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `jobAppDB29` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `all_exercises` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-USE `jobAppDB29`;
+USE `all_exercises`;
 
 --
 -- Table structure for table `basicDetails`
@@ -344,13 +344,6 @@ INSERT INTO `workExperience` VALUES (137,5,'techHolding','developer','2012-02-22
 /*!40000 ALTER TABLE `workExperience` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Current Database: `studentDB26Feb`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `studentDB26Feb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `studentDB26Feb`;
 
 --
 -- Table structure for table `studentDetails`
@@ -387,13 +380,6 @@ INSERT INTO `studentDetails` VALUES (1,'Rajni','Tank','M','2012-08-21','Amroli',
 /*!40000 ALTER TABLE `studentDetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Current Database: `userData`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `userData` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `userData`;
 
 --
 -- Table structure for table `user_registrations`
@@ -425,13 +411,7 @@ LOCK TABLES `user_registrations` WRITE;
 /*!40000 ALTER TABLE `user_registrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Current Database: `studDb27Feb`
---
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `studDb27Feb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `studDb27Feb`;
 
 --
 -- Table structure for table `attendence`
@@ -572,12 +552,8 @@ INSERT INTO `subjectMaster` VALUES (1,1,'OOP','MCA'),(2,1,'DSA','MCA'),(3,1,'DBM
 UNLOCK TABLES;
 
 --
--- Current Database: `userDatabase`
---
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `userDatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-USE `userDatabase`;
 
 --
 -- Table structure for table `usersDetails`
@@ -608,6 +584,35 @@ LOCK TABLES `usersDetails` WRITE;
 /*!40000 ALTER TABLE `usersDetails` DISABLE KEYS */;
 INSERT INTO `usersDetails` VALUES (4,'Maha','shankar',1000,'23430928','ram@gmail.com','Male','read,traveling,singing,codding','Kaila\r\nsh'),(5,'Shiv','Shambhu',100000,'3847238321','shiv@gmail.com','Male','read,traveling','Himalya');
 /*!40000 ALTER TABLE `usersDetails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `studentsMaster`
+--
+
+DROP TABLE IF EXISTS `studentsMaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `studentsMasters` (
+  `studId` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `mobileno` int DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`studId`)
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `studentsMaster`
+--
+
+LOCK TABLES `studentsMaster` WRITE;
+/*!40000 ALTER TABLE `studentsMaster` DISABLE KEYS */;
+INSERT INTO `studentsMaster` VALUES (1,'Minda','Michella','Minda.Michella@gmail.com',70,965609746,'Singapore'),(2,'Helena','Marcellus','Helena.Marcellus@gmail.com',10,163227234,'Brussels'),(3,'Mireielle','Shaddock','Mireielle.Shaddock@gmail.com',35,1499653887,'Raleigh'),(4,'Marnia','Sharl','Marnia.Sharl@gmail.com',13,522446849,'Vitória'),(5,'Julieta','Rocray','Julieta.Rocray@gmail.com',13,498175533,'Bergen'),(6,'Marti','Catie','Marti.Catie@gmail.com',85,368495810,'Buffalo'),(7,'Kial','Han','Kial.Han@gmail.com',83,2130286622,'London'),(8,'Berta','Hylan','Berta.Hylan@gmail.com',55,358509515,'Malmö'),(9,'Coral','Brieta','Coral.Brieta@gmail.com',36,943176605,'Namangan'),(10,'Elise','Fosque','Elise.Fosque@gmail.com',74,1788067030,'Dublin'),(11,'Madalyn','Dalli','Madalyn.Dalli@gmail.com',93,1810942746,'Adelaide'),(12,'Constance','Grayce','Constance.Grayce@gmail.com',88,2063876879,'Christchurch'),(13,'Ofilia','Horan','Ofilia.Horan@gmail.com',18,1218425950,'Munich'),(14,'Rosabelle','Stilwell','Rosabelle.Stilwell@gmail.com',95,830295664,'Brisbane'),(15,'Ira','Ardra','Ira.Ardra@gmail.com',33,442260167,'Concepción'),(16,'Elmira','Berard','Elmira.Berard@gmail.com',82,561131704,'Montreal'),(17,'Aimil','Ehrman','Aimil.Ehrman@gmail.com',54,723494249,'Siem Reap'),(18,'Genovera','Bevin','Genovera.Bevin@gmail.com',51,954273615,'Perm'),(19,'Eolanda','Gladstone','Eolanda.Gladstone@gmail.com',66,414849832,'Quetzaltenango'),(20,'Riannon','Milson','Riannon.Milson@gmail.com',15,1987689935,'Kota Bharu'),(21,'Harmonia','Prouty','Harmonia.Prouty@gmail.com',36,867325097,'Bishkek'),(22,'Amii','Orlene','Amii.Orlene@gmail.com',61,2025734862,'Edmonton'),(23,'Amelia','Janith','Amelia.Janith@gmail.com',22,1910805740,'Mendoza'),(24,'Rhoda','Maroney','Rhoda.Maroney@gmail.com',100,198706905,'Yellowknife'),(25,'Ardys','Fiann','Ardys.Fiann@gmail.com',89,1529318554,'Rochester'),(26,'Jany','Olnee','Jany.Olnee@gmail.com',88,609111830,'Johor Bahru'),(27,'Jere','Erminia','Jere.Erminia@gmail.com',31,1679719563,'Oklahoma City'),(28,'Benita','O\'Rourke','Benita.O\'Rourke@gmail.com',11,443014966,'Petropavlovsk-Kamchatsky'),(29,'Concettina','Pitt','Concettina.Pitt@gmail.com',32,485543077,'Split (city)'),(30,'Kenna','Donell','Kenna.Donell@gmail.com',52,453746027,'Ndola');
+/*!40000 ALTER TABLE `studentMaster` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
