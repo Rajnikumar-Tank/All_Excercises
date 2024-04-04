@@ -1,77 +1,77 @@
 
-const conn=require('../connection.js')
+const conn = require('../connection.js')
 
 // router.get('/', (req, res) => {
-const applicationFormHome= (req, res) => {
-    res.render("ApplicationForm/index.ejs", { title: 'home' });
+const applicationFormHome = (req, res) => {
+  res.render("ApplicationForm/index.ejs", { title: 'home' });
 }
 
 // router.post('/getData', (req, res) => {
-const applicationFormGetData=(req, res) => {
-    const user = req.body;
-    sql = `
+const applicationFormGetData = (req, res) => {
+  const user = req.body;
+  sql = `
         insert into usersDetails(firstname ,lastname,age,phone,emailId ,gender,hobbies,address)
         values('`+ user.firstName + `','` + user.lastname + `',` + user.age + `,
         '` + user.phone + `','` + user.email + `','` + user.gender + `','` + user.hobi + `','` + user.address + `');`
 
-    conn.query(sql,(err)=>{
-        if(err) throw err;
-        else{
-            console.log('User Inserted!!!');
-        }
-    })
+  conn.query(sql, (err) => {
+    if (err) throw err;
+    else {
+      console.log('User Inserted!!!');
+    }
+  })
 }
 // router.get('/alluser', (req, res) => {
-const applicationFormAllUser =(req, res) => {
-    const sql="Select * from usersDetails;"
-    conn.query(sql,(err,result)=>{
-        if(err) {
-            console.error(err);
-            return;
-        }
-        else{
-            var userDetails=[]
-            for(let i=0;i<result.length;i++){
-                userDetails[i]={}
-                userDetails[i].userId=result[i].userId;
-                userDetails[i].firstName=result[i].firstname;
-                userDetails[i].lastname=result[i].lastname;
-                userDetails[i].email=result[i].emailId;
-                userDetails[i].phone=result[i].phone;
-            }
-            // console.log(result);
-            // userDetails=result;
-            
-            console.log(userDetails);
-            res.render("ApplicationForm/allUser.ejs", { usersData : userDetails });
-        }
-    })
-    
+const applicationFormAllUser = (req, res) => {
+  const sql = "Select * from usersDetails;"
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    else {
+      var userDetails = []
+      for (let i = 0; i < result.length; i++) {
+        userDetails[i] = {}
+        userDetails[i].userId = result[i].userId;
+        userDetails[i].firstName = result[i].firstname;
+        userDetails[i].lastname = result[i].lastname;
+        userDetails[i].email = result[i].emailId;
+        userDetails[i].phone = result[i].phone;
+      }
+      // console.log(result);
+      // userDetails=result;
+
+      console.log(userDetails);
+      res.render("ApplicationForm/allUser.ejs", { usersData: userDetails });
+    }
+  })
+
 }
 
 // router.get('/oneUser', (req, res) => {
-const applicationFormOneUser =(req, res) => {
-    userId = req.query.userId;
-    var user1 = {};
-    sql='select * from usersDetails where userId='+userId+";";
-    conn.query(sql,(err,result)=>{
-        if(err){
-            console.error(err);
-        }
-        else{
-            user1.firstName=result[0].firstname;
-            user1.lastname=result[0].lastname;
-            user1.age=result[0].age;
-            user1.phone=result[0].phone;
-            user1.email=result[0].emailId;
-            user1.gender=result[0].gender;
-            user1.hobi=result[0].hobbies;
-            user1.address=result[0].address;
-        }
-        
-        // console.log(user1);
-        res.render('ApplicationForm/oneUser.ejs', { user1 })
-    })
+const applicationFormOneUser = (req, res) => {
+  userId = req.query.userId;
+  var user1 = {};
+  sql = 'select * from usersDetails where userId=' + userId + ";";
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+    }
+    else {
+      user1.firstName = result[0].firstname;
+      user1.lastname = result[0].lastname;
+      user1.age = result[0].age;
+      user1.phone = result[0].phone;
+      user1.email = result[0].emailId;
+      user1.gender = result[0].gender;
+      user1.hobi = result[0].hobbies;
+      user1.address = result[0].address;
+    }
+
+    // console.log(user1);
+    res.render('ApplicationForm/oneUser.ejs', { user1 })
+  })
 }
 
-module.exports={applicationFormAllUser,applicationFormGetData,applicationFormHome,applicationFormOneUser}
+module.exports = { applicationFormAllUser, applicationFormGetData, applicationFormHome, applicationFormOneUser }

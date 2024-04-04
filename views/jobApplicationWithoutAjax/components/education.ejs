@@ -1,41 +1,42 @@
 <fieldset>
-    <legend>Educational Details</legend>
-    <table>
-      <% var code = code || null %>
-        <tr>
-            <th>SSC Result: <br> Name Of Board:</th>
-            <td><input type="text" placeholder="GSEB" maxlength="50" name="gBoard" value="<%= code=='update'?result2[0].BoardOrUni:'' %>"></td>
-            <th>Passing Year:</th>
-            <td><input type="text" maxlength="4" placeholder="2002" name="PassingY1" id="PassingY1" value="<%= code=='update'?result2[0].passingYear:'' %>"></td>
-            <th>Percentage:</th>
-            <td><input type="text" placeholder="00.00" value="<%= code=='update'?result2[0].percentage:'' %>" name="Percentage1" id="Percentage1"></td>
-        </tr>
-        <tr>
-            <th>HSC/Diploma Result: <br> Name Of Board:</th>
-            <td><input type="text" placeholder="GSHEB" name="Board2" value="<%= code=='update'?result2[1].BoardOrUni:'' %>"></td>
-            <th>Passing Year:</th> 
-            <td><input type="text" maxlength="4" placeholder="2002" name="PassingY2" id="PassingY2" value="<%= code=='update'?result2[1].passingYear:'' %>"></td>
-            <th>Percentage:</th>
-            <td><input type="text" placeholder="00.00"  name="Percentage2" id="Percentage2" value="<%= code=='update'?result2[1].percentage:'' %>"></td>
-        </tr><tr>
-            <th>Bachelor Degree Result: <br> Course name</th>
-            <td><input type="text" placeholder="BCA" name="Course1" value="<%= code=='update'?result2[2].course:'' %>"></td>
-            <th>University</th>
-            <td><input type="text" placeholder="VNSGU" name="University1" id="University1" value="<%= code=='update'?result2[2].BoardOrUni:'' %>"></td>
-            <th>Passing Year:</th>
-            <td><input type="text" maxlength="4" placeholder="2002" name="PassingY3" id="PassingY3" value="<%= code=='update'?result2[2].passingYear:'' %>"></td>
-            <th>Percentage:</th>
-            <td><input type="text" placeholder="00.00"  name="Percentage3" id="Percentage3" value="<%= code=='update'?result2[2].percentage:'' %>"></td>
-        </tr>
-        <tr>
-            <th>Master Degree Result: <br> Course name</th>
-            <td><input type="text" placeholder="MCA" name="Course2" value="<%= code=='update' && result2[3] != undefined ?result2[3].course:'' %>"></td>
-            <th>University</td>
-            <td><input type="text" placeholder="DDU" name="University2" id="University2" value="<%= code=='update' && result2[3] != undefined ?result2[3].BoardOrUni:'' %>"></td>
-            <th>Passing Year:</th>
-            <td><input type="text" maxlength="4" placeholder="2002" name="PassingY4" id="PassingY4" value="<%= code=='update' && result2[3] != undefined  ?result2[3].passingYear:'' %>"></td>
-            <th>Percentage:</th>
-            <td><input type="text" placeholder="00.00"  name="Percentage4" id="Percentage4" value="<%= code=='update' && result2[3] != undefined ?result2[3].percentage:'' %>"></td>
-        </tr>
-    </table>
+  <legend>Educational Details</legend>
+  <table>
+    <% var code = code || null %>
+    <tr>
+      <th>SSC Result: <br> Name Of Board:</th>
+      <td><input type="text" placeholder="GSEB" maxlength="50" name="gBoard" value="<%= code=='update'?result2[0].BoardOrUni:'' %>"></td>
+      <th>Passing Year:</th>
+      <td><input type="text" maxlength="4" placeholder="2002" name="PassingY1" id="PassingY1" value="<%= code=='update'?result2[0].passingYear:'' %>"></td>
+      <th>Percentage:</th>
+      <td><input type="text" placeholder="00.00" value="<%= code=='update'?result2[0].percentage:'' %>" name="Percentage1" id="Percentage1"></td>
+    </tr>
+    <tr>
+      <th>HSC/Diploma Result: <br> Name Of Board:</th>
+      <td><input type="text" placeholder="GSHEB" name="Board2" value="<%= code=='update'?result2[1].BoardOrUni:'' %>"></td>
+      <th>Passing Year:</th>
+      <td><input type="text" maxlength="4" placeholder="2002" name="PassingY2" id="PassingY2" value="<%= code=='update'?result2[1].passingYear:'' %>"></td>
+      <th>Percentage:</th>
+      <td><input type="text" placeholder="00.00" name="Percentage2" id="Percentage2" value="<%= code=='update'?result2[1].percentage:'' %>"></td>
+    </tr>
+    <tr>
+      <th>Bachelor Degree Result: <br> Course name</th>
+      <td><input type="text" placeholder="BCA" name="Course1" value="<%= code=='update'?result2[2].course:'' %>"></td>
+      <th>University</th>
+      <td><input type="text" placeholder="VNSGU" name="University1" id="University1" value="<%= code=='update'?result2[2].BoardOrUni:'' %>"></td>
+      <th>Passing Year:</th>
+      <td><input type="text" maxlength="4" placeholder="2002" name="PassingY3" id="PassingY3" value="<%= code=='update'?result2[2].passingYear:'' %>"></td>
+      <th>Percentage:</th>
+      <td><input type="text" placeholder="00.00" name="Percentage3" id="Percentage3" value="<%= code=='update'?result2[2].percentage:'' %>"></td>
+    </tr>
+    <tr>
+      <th>Master Degree Result: <br> Course name</th>
+      <td><input type="text" placeholder="MCA" name="Course2" value="<%= code=='update' && result2[3] != undefined ?result2[3].course:'' %>"></td>
+      <th>University</td>
+      <td><input type="text" placeholder="DDU" name="University2" id="University2" value="<%= code=='update' && result2[3] != undefined ?result2[3].BoardOrUni:'' %>"></td>
+      <th>Passing Year:</th>
+      <td><input type="text" maxlength="4" placeholder="2002" name="PassingY4" id="PassingY4" value="<%= code=='update' && result2[3] != undefined  ?result2[3].passingYear:'' %>"></td>
+      <th>Percentage:</th>
+      <td><input type="text" placeholder="00.00" name="Percentage4" id="Percentage4" value="<%= code=='update' && result2[3] != undefined ?result2[3].percentage:'' %>"></td>
+    </tr>
+  </table>
 </fieldset>

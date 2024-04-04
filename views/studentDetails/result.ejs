@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style2.css">
-    <title>Result</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style2.css">
+  <title>Result</title>
 </head>
+
 <body>
-    <div class="foot">
-        <h3>Rajnikumar Tank</h3>
-    </div>
-    <a href="/studentDetails/resultFind">Click here to search Student Result</a>
-    <table>
-        <caption>Results</caption>
-        <tr>
-            <th rowspan="2">Student Id</th>
-            <th rowspan="2">Student name</th>
-            <th colspan="2">Prelims</th>
-            <th colspan="2">Terminal</th>
-            <th colspan="2">Final</th>
-            <th rowspan="2">Total</th>
-            <th rowspan="2">Action</th>
-        </tr>
-        <tr>
-            <th>Prectical</th>
-            <th>Thoery</th>
-            <th>Prectical</th>
-            <th>Thoery</th>
-            <th>Prectical</th>
-            <th>Thoery</th>
-        </tr>
-        <% for(let i=0;i<prelims.length;i++){ 
-            %> 
-            <tr>
-                <td><%= final[i].studId%></td>
-                <td><%= final[i].name %></td>
-                <td><%= prelims[i].pp %></td>
-                <td><%= prelims[i].pt %></td>
-                <td><%= terminalData[i].pp%></td>
-                <td><%= terminalData[i].pt%></td>
-                <td><%= final[i].pp %></td>
-                <td><%= final[i].pt %></td>
-                <td><%= prelims[i].pp+prelims[i].pt+terminalData[i].pp+terminalData[i].pt+final[i].pp+final[i].pt %></td>
-                <td><a href="/studentDetails/report?studId=<%= final[i].studId%>">View More</a></td>
-            </tr>
-        <%} %>
-    </table>
+  <div class="foot">
+    <h3>Rajnikumar Tank</h3>
+  </div>
+  <a href="/studentDetails/resultFind">Click here to search Student Result</a>
+  <table>
+    <caption>Results</caption>
+    <tr>
+      <th rowspan="2">Student Id</th>
+      <th rowspan="2">Student name</th>
+      <th colspan="2">Prelims</th>
+      <th colspan="2">Terminal</th>
+      <th colspan="2">Final</th>
+      <th rowspan="2">Total</th>
+      <th rowspan="2">Action</th>
+    </tr>
+    <tr>
+      <th>Prectical</th>
+      <th>Thoery</th>
+      <th>Prectical</th>
+      <th>Thoery</th>
+      <th>Prectical</th>
+      <th>Thoery</th>
+    </tr>
+    <% for(let i=0;i<prelims.length;i++){ 
+            %>
+    <tr>
+      <td><%= final[i].studId%></td>
+      <td><%= final[i].name %></td>
+      <td><%= prelims[i].pp %></td>
+      <td><%= prelims[i].pt %></td>
+      <td><%= terminalData[i].pp%></td>
+      <td><%= terminalData[i].pt%></td>
+      <td><%= final[i].pp %></td>
+      <td><%= final[i].pt %></td>
+      <td><%= prelims[i].pp+prelims[i].pt+terminalData[i].pp+terminalData[i].pt+final[i].pp+final[i].pt %></td>
+      <td><a href="/studentDetails/report?studId=<%= final[i].studId%>">View More</a></td>
+    </tr>
+    <%} %>
+  </table>
 </body>
+
 </html>

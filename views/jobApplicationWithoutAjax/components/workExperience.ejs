@@ -1,39 +1,39 @@
 <fieldset>
-    <legend>Work Experience</legend>
-    <% var code = code || null %>
-    <table >  
+  <legend>Work Experience</legend>
+  <% var code = code || null %>
+  <table>
     <tbody id="experience">
 
-        <%if(code=='update'){ %> 
-            <tr>
-                <td><a id="plus1">+</a></td>
-            <td><a id="minus1">-</a></td>
-            </tr>
-            <% for(i in result3){%>    
-                <tr>
-                    <th>Company Name</th>
-                    <td><input type="text" placeholder="ex:eSparkBiz"  Name="Company[]" value="<%= code=='update'?result3[i].companyName:'' %>"></td>
-                    <th>Designation</th>
-                    <td><input type="text" placeholder="ex:Product Manager" name="Designation[]" id="Designation" value="<%= code=='update'?result3[i].Designation:'' %>"></td>
-                    <th>From</th>
-                    <td><input type="text" placeholder="ex:DD/MM/YYYY" name="From[]" id="From" value="<%= code=='update'?result3[i].fromDate:'' %>"></td>
-                    <th>To</th>
-                    <td><input type="text" placeholder="ex:DD/MM/YYYY" name="To[]" id="To" value="<%= code=='update'?result3[i].toDate:'' %>"></td>
-                </tr>
-                <%} }else{%>  
-        <tr>
-            <th>Company Name</th>
-            <td><input type="text" placeholder="ex:eSparkBiz"  Name="Company[]" value="<%= code=='update'?result3[0].companyName:'' %>"></td>
-            <th>Designation</th>
-            <td><input type="text" placeholder="ex:Product Manager" name="Designation[]" id="Designation" value="<%= code=='update'?result3[0].Designation:'' %>"></td>
-            <th>From</th>
-            <td><input type="text" placeholder="ex:DD/MM/YYYY" name="From[]" id="From" value="<%= code=='update'?result3[0].fromDate:'' %>"></td>
-            <th>To</th>
-            <td><input type="text" placeholder="ex:DD/MM/YYYY" name="To[]" id="To" value="<%= code=='update'?result3[0].toDate:'' %>"></td>
-            <td><a id="plus1" >+</a></td>
-            <td><a id="minus1">-</a></td>
-        </tr>
-        <%}%>
+      <%if(code=='update'){ %>
+      <tr>
+        <td><a id="plus1">+</a></td>
+        <td><a id="minus1">-</a></td>
+      </tr>
+      <% for(i in result3){%>
+      <tr>
+        <th>Company Name</th>
+        <td><input type="text" placeholder="ex:eSparkBiz" Name="Company[]" value="<%= code=='update'?result3[i].companyName:'' %>"></td>
+        <th>Designation</th>
+        <td><input type="text" placeholder="ex:Product Manager" name="Designation[]" id="Designation" value="<%= code=='update'?result3[i].Designation:'' %>"></td>
+        <th>From</th>
+        <td><input type="text" placeholder="ex:DD/MM/YYYY" name="From[]" id="From" value="<%= code=='update'?result3[i].fromDate:'' %>"></td>
+        <th>To</th>
+        <td><input type="text" placeholder="ex:DD/MM/YYYY" name="To[]" id="To" value="<%= code=='update'?result3[i].toDate:'' %>"></td>
+      </tr>
+      <%} }else{%>
+      <tr>
+        <th>Company Name</th>
+        <td><input type="text" placeholder="ex:eSparkBiz" Name="Company[]" value="<%= code=='update'?result3[0].companyName:'' %>"></td>
+        <th>Designation</th>
+        <td><input type="text" placeholder="ex:Product Manager" name="Designation[]" id="Designation" value="<%= code=='update'?result3[0].Designation:'' %>"></td>
+        <th>From</th>
+        <td><input type="text" placeholder="ex:DD/MM/YYYY" name="From[]" id="From" value="<%= code=='update'?result3[0].fromDate:'' %>"></td>
+        <th>To</th>
+        <td><input type="text" placeholder="ex:DD/MM/YYYY" name="To[]" id="To" value="<%= code=='update'?result3[0].toDate:'' %>"></td>
+        <td><a id="plus1">+</a></td>
+        <td><a id="minus1">-</a></td>
+      </tr>
+      <%}%>
     </tbody>
     </table>
     <script src="/plusMinusExperience.js"></script>

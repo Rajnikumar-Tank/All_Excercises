@@ -1,13 +1,12 @@
 const express = require('express');
 
-const app=express()
+const app = express()
 
-const authoriseToken=require('./middleware/middleware.js')
-const cookie=require('cookie-parser');
-const dotenv=require('dotenv');
-const router=require('./route.js')
+const cookie = require('cookie-parser');
+const dotenv = require('dotenv');
+const router = require('./route.js')
 dotenv.config();
-const port = process.env.PORT; 
+const port = process.env.PORT;
 
 app.set('view engine', 'ejs');
 
@@ -15,13 +14,13 @@ app.use(express.static('public'))
 
 app.use(express.json())
 
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 
-app.use(cookie()) 
+app.use(cookie())
 
 app.use(router);
 
-const conn=require('./connection.js')
+const conn = require('./connection.js')
 // const applicationForm=require('./controller/applicationForm.controller.js')
 // const paginationGrid=require('./controller/paginationGrid.controller.js')
 // const studentDetails =require('./controller/StudentDetails.controller.js')
@@ -41,6 +40,6 @@ const conn=require('./connection.js')
 
 
 
-app.listen(port,()=>{
-    console.log('Server is running on:'+port)
+app.listen(port, () => {
+  console.log('Server is running on:' + port)
 })

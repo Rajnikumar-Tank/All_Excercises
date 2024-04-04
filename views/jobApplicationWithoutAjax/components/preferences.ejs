@@ -1,40 +1,39 @@
 <fieldset>
-    <legend>Preferance</legend>
-    <table>
-      <% var code = code || null %>
-        
-        <% var result=result || null%>
-        <% if (result) { %>
-        <tr>
-            <%if(code=='update' ){ var location=result7.prefere_location.split(',') }%>
+  <legend>Preferance</legend>
+  <table>
+    <% var code = code || null %>
 
-        <td><label for="">Preferd Location</label></td>
-        <td><select name='preference_location' id=""  multiple>
-                <% for(record of result){ %>
-                    <% if(record.selectType == 'select' && record.selectName == 'preference_location'){ %>
-                      <option id="" value="<%= record.optionKey %>" `<%if(code=='update'){ for(i=0;i<location.length;i++){
+    <% var result=result || null%>
+    <% if (result) { %>
+    <tr>
+      <%if(code=='update' ){ var location=result7.prefere_location.split(',') }%>
+
+      <td><label for="">Preferd Location</label></td>
+      <td><select name='preference_location' id="" multiple>
+          <% for(record of result){ %>
+          <% if(record.selectType == 'select' && record.selectName == 'preference_location'){ %>
+          <option id="" value="<%= record.optionKey %>" `<%if(code=='update'){ for(i=0;i<location.length;i++){
                         if(location[i]==record.optionKey){
-                            %>` selected
-                        `<% break; }
-                      } %>`  `<%}%>`> <%= record.optionValue %></option>
-                    <%}%>
-                <%}%> 
-            </select></td>
-        <td>Notice Period</td>
-        <td><input type="text" name="notice" maxlength="10" value="<%=code=='update'? result7.noticePeriod:'' %>" placeholder="1 month"></td>
-        <td>Expected CTC</td>
-        <td><input type="text" name="ECTC" value="<%=code=='update'? result7.expactedCTC: ''%>" placeholder="000000.00"></td>
-        <td>Current CTC</td>
-        <td><input type="text" name="CCTC" value="<%=code=='update'? result7.currentCTC: '' %>"  placeholder="000000.00"></td>
-        <td><label for="">Department</label></td>
-        <td><select name='department' id="">
-                <% for(record of result){ %>
-                    <% if(record.selectType == 'select' && record.selectName == 'department'){ %>
-                      <option id="" value="<%= record.optionKey %>" `<% if(code=='update' && result7.department == record.optionKey){%>` selected `<%}%>`> <%= record.optionValue %></option>
-                    <%}%>
-                <%}%> 
-            </select></td>
+                            %>` selected `<% break; }
+                      } %>` `<%}%>`> <%= record.optionValue %></option>
+            <%}%>
+                <%}%>
+        </select></td>
+      <td>Notice Period</td>
+      <td><input type="text" name="notice" maxlength="10" value="<%=code=='update'? result7.noticePeriod:'' %>" placeholder="1 month"></td>
+      <td>Expected CTC</td>
+      <td><input type="text" name="ECTC" value="<%=code=='update'? result7.expactedCTC: ''%>" placeholder="000000.00"></td>
+      <td>Current CTC</td>
+      <td><input type="text" name="CCTC" value="<%=code=='update'? result7.currentCTC: '' %>" placeholder="000000.00"></td>
+      <td><label for="">Department</label></td>
+      <td><select name='department' id="">
+          <% for(record of result){ %>
+          <% if(record.selectType == 'select' && record.selectName == 'department'){ %>
+          <option id="" value="<%= record.optionKey %>" `<% if(code=='update' && result7.department == record.optionKey){%>` selected `<%}%>`> <%= record.optionValue %></option>
+            <%}%>
+                <%}%>
+        </select></td>
     </tr>
-    <% } %> 
-    </table>
+    <% } %>
+  </table>
 </fieldset>

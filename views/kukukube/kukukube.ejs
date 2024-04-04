@@ -2,157 +2,158 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WonderColor</title>
-    <style>
-        td {
-            border: 4px solid rgb(186, 252, 5);
-            background-color: rgb(202, 13, 13);
-            border-radius: 5px;
-            cursor: pointer;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WonderColor</title>
+  <style>
+    td {
+      border: 4px solid rgb(186, 252, 5);
+      background-color: rgb(202, 13, 13);
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-        #cells {
-            opacity: 0.80;
-        }
+    #cells {
+      opacity: 0.80;
+    }
 
-        body {
-            background-color: rgb(225, 174, 112);
-        }
+    body {
+      background-color: rgb(225, 174, 112);
+    }
 
-        table {
-            border: 5px solid rgb(237, 9, 9);
-            margin: 0 auto;
-            margin-top: 10px;
-            height: 350px;
-            width: 350px;
-        }
-        #score{
-            font-family: 'Courier New', Courier, monospace;
-            font-size: large;
-        }
-    </style>
+    table {
+      border: 5px solid rgb(237, 9, 9);
+      margin: 0 auto;
+      margin-top: 10px;
+      height: 350px;
+      width: 350px;
+    }
+
+    #score {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: large;
+    }
+  </style>
 
 </head>
 
 <body>
-    <h1>Rajnikumar Tank</h1>
-    <h2>Employee Id:24DEV039</h2>
-    <table id="modify">
-        <p id="score">Score:0</p>
-        <center>
-            <p id="time"></p>
-        </center>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td id="cells"></td>
-            <td></td>
-        </tr>
-    </table>
+  <h1>Rajnikumar Tank</h1>
+  <h2>Employee Id:24DEV039</h2>
+  <table id="modify">
+    <p id="score">Score:0</p>
     <center>
-        <p id="result"></p>
-        <p id="result2"></p>
-        <br>
-        <button onclick="reset()"><a href="KUKUKUBE">Restart</a></button>
-
+      <p id="time"></p>
     </center>
-    <script>
-        var count = 0;
-        localStorage.setItem('count', count);
-        var time = 31;
-        var timer = setInterval(function () {
-            var displayTime = document.getElementById('time');
-            time--;
-            if (time >= 0) {
-                displayTime.innerHTML = "Second Remaining:" + time;
-            }
-            else {
-                var displayResult = document.getElementById('result');
-                var displayResult2 = document.getElementById('result2');
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td id="cells"></td>
+      <td></td>
+    </tr>
+  </table>
+  <center>
+    <p id="result"></p>
+    <p id="result2"></p>
+    <br>
+    <button onclick="reset()"><a href="KUKUKUBE">Restart</a></button>
 
-                console.log(localStorage.getItem('count'));
-                try {
-                    if (localStorage.getItem('count') < count) {
-                        console.log(localStorage.getItem('count'));
+  </center>
+  <script>
+    var count = 0;
+    localStorage.setItem('count', count);
+    var time = 31;
+    var timer = setInterval(function() {
+      var displayTime = document.getElementById('time');
+      time--;
+      if (time >= 0) {
+        displayTime.innerHTML = "Second Remaining:" + time;
+      } else {
+        var displayResult = document.getElementById('result');
+        var displayResult2 = document.getElementById('result2');
 
-                        localStorage.setItem('count', count);
-                        displayResult.innerHTML = "Your Score is " + count;
-                    }
-                    else {
-                        displayResult.innerHTML = "Your Score is " + count;
+        console.log(localStorage.getItem('count'));
+        try {
+          if (localStorage.getItem('count') < count) {
+            console.log(localStorage.getItem('count'));
 
-                    }
-                    clearInterval(timer);
-                } catch (e) {
-                    localStorage.setItem('count', count);
+            localStorage.setItem('count', count);
+            displayResult.innerHTML = "Your Score is " + count;
+          } else {
+            displayResult.innerHTML = "Your Score is " + count;
 
-                }
+          }
+          clearInterval(timer);
+        } catch (e) {
+          localStorage.setItem('count', count);
 
-            }
-        }, 1000)
-        var cells = document.getElementById('cells');
-        cells.setAttribute('onclick', 'starts()');
-        function starts() {
-            // console.log("Start");
-            if (time < 0) {
-
-            } else {
-                var td = document.getElementById('cells');
-                td.setAttribute('id', "");
-                td.setAttribute('onclick', "");
-                onRowPlus();
-                onColPlus();
-
-                tds = document.querySelectorAll('td')
-                var r = Math.floor(Math.random() * 255);
-                var g = Math.floor(Math.random() * 255);
-                var b = Math.floor(Math.random() * 256);
-                var rand = "rgb(" + r + "," + g + "," + b + ")";
-                for (td of tds)
-                    td.style.backgroundColor = rand;
-                var td1 = document.getElementById('modify');
-                // console.log(td1);
-                var len = td1.rows[0].cells.length;
-                let col = Math.ceil(Math.random() * (len));
-                let row = Math.floor(Math.random() * (len));
-                // console.log(td1);
-                td = tds[col * row];
-                td.setAttribute("id", "cells");
-                count++;
-                document.getElementById('score').innerHTML = "Score:" + count;
-                td.setAttribute('onclick', 'starts()');
-            }
         }
 
-        function onColPlus() {
+      }
+    }, 1000)
+    var cells = document.getElementById('cells');
+    cells.setAttribute('onclick', 'starts()');
 
-            var tbl = document.getElementById('modify');
-            rowcount = tbl.rows.length;
-            colcount = tbl.rows[0].cells.length;
-            if (colcount > 8) {
-                return;
-            }
-            for (i = 0; i < rowcount; i++) {
-                tbl.rows[i].insertCell(0);
-            }
-        }
-        function onRowPlus() {
-            var tbl = document.getElementById('modify');
-            rowcount = tbl.rows.length;
-            colcount = tbl.rows[0].cells.length;
-            if (rowcount > 8) {
-                return;
-            }
-            var row = tbl.insertRow(-1);
-            for (i = 0; i < colcount; i++) {
-                row.insertCell(0);
-            }
-        }
-    </script>
+    function starts() {
+      // console.log("Start");
+      if (time < 0) {
+
+      } else {
+        var td = document.getElementById('cells');
+        td.setAttribute('id', "");
+        td.setAttribute('onclick', "");
+        onRowPlus();
+        onColPlus();
+
+        tds = document.querySelectorAll('td')
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 256);
+        var rand = "rgb(" + r + "," + g + "," + b + ")";
+        for (td of tds)
+          td.style.backgroundColor = rand;
+        var td1 = document.getElementById('modify');
+        // console.log(td1);
+        var len = td1.rows[0].cells.length;
+        let col = Math.ceil(Math.random() * (len));
+        let row = Math.floor(Math.random() * (len));
+        // console.log(td1);
+        td = tds[col * row];
+        td.setAttribute("id", "cells");
+        count++;
+        document.getElementById('score').innerHTML = "Score:" + count;
+        td.setAttribute('onclick', 'starts()');
+      }
+    }
+
+    function onColPlus() {
+
+      var tbl = document.getElementById('modify');
+      rowcount = tbl.rows.length;
+      colcount = tbl.rows[0].cells.length;
+      if (colcount > 8) {
+        return;
+      }
+      for (i = 0; i < rowcount; i++) {
+        tbl.rows[i].insertCell(0);
+      }
+    }
+
+    function onRowPlus() {
+      var tbl = document.getElementById('modify');
+      rowcount = tbl.rows.length;
+      colcount = tbl.rows[0].cells.length;
+      if (rowcount > 8) {
+        return;
+      }
+      var row = tbl.insertRow(-1);
+      for (i = 0; i < colcount; i++) {
+        row.insertCell(0);
+      }
+    }
+  </script>
 </body>
 
 </html>

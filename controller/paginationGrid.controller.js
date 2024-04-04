@@ -1,18 +1,18 @@
-const express=require('express');
+const express = require('express');
 
 
-const router=express.Router();
+const router = express.Router();
 
-const getStudent=require('./getData')
+const getStudent = require('./getData')
 
-const port=3001
-const host='localhost'
+const port = 3001
+const host = 'localhost'
 
 
 // router.get('/',(req,res)=>{
-const paginationGridHome= (req,res)=>{
-    const students= getStudent(req,res);
-    
+const paginationGridHome = (req, res) => {
+  const students = getStudent(req, res);
+
 }
 
-module.exports={paginationGridHome}
+module.exports = { paginationGridHome }

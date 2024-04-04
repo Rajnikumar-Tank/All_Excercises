@@ -1,19 +1,19 @@
 <div class="pagination">
-    <% if(thisPage >0 ) { %>
-        <a href="/paginationGrid/?page=<%= 0 %>" id="left2">&lt;&lt;</a>
-        <a href="/paginationGrid/?page=<%= parseInt(thisPage)-1 %>" id="left1">&lt</a>
-    <%}
+  <% if(thisPage >0 ) { %>
+  <a href="/paginationGrid/?page=<%= 0 %>" id="left2">&lt;&lt;</a>
+  <a href="/paginationGrid/?page=<%= parseInt(thisPage)-1 %>" id="left1">&lt</a>
+  <%}
     else{%>
-        <a  class="disable" id="leftDisable2">&lt;&lt;</a>
-        <a  class="disable" id="leftDisable1">&lt</a>
-    <%}
+  <a class="disable" id="leftDisable2">&lt;&lt;</a>
+  <a class="disable" id="leftDisable1">&lt</a>
+  <%}
     %>
-        <span id="page"><%=parseInt(thisPage)+1%> page of <%= parseInt(totalRecord/200) %></span>
-    <% if(thisPage <= parseInt(totalRecord/200)-2) { %>
-        <a href="/paginationGrid/?page=<%= parseInt(thisPage)+1 %>" id="right1">&gt;</a>
-        <a href="/paginationGrid/?page=<%= parseInt(totalRecord/200)-1 %>" id="right2">&gt;&gt;</a>
-    <% } else { %>
-        <a  class="disable" id="rightDisable1">&gt;</a>
-        <a  class="disable" id="rightDisable2">&gt;&gt;</a>
-    <% } %>
+  <span id="page"><%=parseInt(thisPage)+1%> page of <%= parseInt(totalRecord/200) %></span>
+  <% if(thisPage <= parseInt(totalRecord/200)-2) { %>
+  <a href="/paginationGrid/?page=<%= parseInt(thisPage)+1 %>" id="right1">&gt;</a>
+  <a href="/paginationGrid/?page=<%= parseInt(totalRecord/200)-1 %>" id="right2">&gt;&gt;</a>
+  <% } else { %>
+  <a class="disable" id="rightDisable1">&gt;</a>
+  <a class="disable" id="rightDisable2">&gt;&gt;</a>
+  <% } %>
 </div>

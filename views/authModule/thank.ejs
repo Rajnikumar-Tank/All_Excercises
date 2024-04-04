@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank you</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank you</title>
 </head>
+
 <body>
-    
-    <%var msg=msg || null %>
-    <%if(msg){%>
-        <h3><%= msg %></h3>
-        <a href="/">Continue to Login</a>
-    <%}%>
+
+  <%var msg=msg || null %>
+  <%if(msg){%>
+  <h3><%= msg %></h3>
+  <a href="/">Continue to Login</a>
+  <%}%>
     <%var errMsg=errMsg || null %>
-    <%if(errMsg){%>
-        <h3><%= errMsg %></h3>
-        <a href="/signup">Please Signup again...</a>
-    <%}%>
+  <%if(errMsg){%>
+  <h3><%= errMsg %></h3>
+  <a href="/signup">Please Signup again...</a>
+  <%}%>
 </body>
 </html>

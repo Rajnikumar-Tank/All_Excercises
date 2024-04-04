@@ -1,36 +1,38 @@
 <table border="1">
-    <caption><h1>Student Details</h1><br><%- include("./pagination") %></caption>
-    
-    <tr>
-        <th>User Id<a href="/paginationGrid/?page=<%=thisPage %>&order=1">&uarr;</a></th>
-        <th>First Name <a href="/paginationGrid/?page=<%=thisPage %>&order=2">&uarr;</a></th>
-        <th>Last Name <a href="/paginationGrid/?page=<%=thisPage %>&order=3">&uarr;</a></th>
-        <th>Gender </th>
-        <th>Date Of Birth <a href="/paginationGrid/?page=<%=thisPage %>&order=5">&uarr;</a></th>
-        <th>Address 1</th>
-        <th>Address 2</th>
-        <th>City <a href="/paginationGrid/?page=<%=thisPage %>&order=8">&uarr;</a></th>
-        <th>Email Id <a href="/paginationGrid/?page=<%=thisPage %>&order=9">&uarr;</a></th>
-        <th>Phone </th>
-        <th>State<a href="/paginationGrid/?page=<%=thisPage %>&order=11">&uarr;</a></th>
-        <th>Zip Code <a href="/paginationGrid/?page=<%=thisPage %>&order=12">&uarr;</a></th>
-        <th>createdAt <a href="/paginationGrid/?page=<%=thisPage %>&order=13">&uarr;</a></th>
-    </tr>
-    <% for(stud of student){ %>
-        <tr>
-            <td><%= stud.studId %></td>
-        <td><%= stud.firstName %></td>
-        <td><%= stud.lastName %></td>
-        <td><%= stud.gender %></td>
-        <td><%= stud.dateOfBirth %></td>
-        <td><%= stud.address1 %></td>
-        <td><%= stud.address2 %></td>
-        <td><%= stud.city %></td>
-        <td><%= stud.emailId %></td>
-        <td><%= stud.phone %></td>
-        <td><%= stud.state %></td>
-        <td><%= stud.zipCode %></td>
-        <td><%= stud.createdAt %></td>
-    </tr>
-    <% } %>
+  <caption>
+    <h1>Student Details</h1><br><%- include("./pagination") %>
+  </caption>
+
+  <tr>
+    <th>User Id<a href="/paginationGrid/?page=<%=thisPage %>&order=1">&uarr;</a></th>
+    <th>First Name <a href="/paginationGrid/?page=<%=thisPage %>&order=2">&uarr;</a></th>
+    <th>Last Name <a href="/paginationGrid/?page=<%=thisPage %>&order=3">&uarr;</a></th>
+    <th>Gender </th>
+    <th>Date Of Birth <a href="/paginationGrid/?page=<%=thisPage %>&order=5">&uarr;</a></th>
+    <th>Address 1</th>
+    <th>Address 2</th>
+    <th>City <a href="/paginationGrid/?page=<%=thisPage %>&order=8">&uarr;</a></th>
+    <th>Email Id <a href="/paginationGrid/?page=<%=thisPage %>&order=9">&uarr;</a></th>
+    <th>Phone </th>
+    <th>State<a href="/paginationGrid/?page=<%=thisPage %>&order=11">&uarr;</a></th>
+    <th>Zip Code <a href="/paginationGrid/?page=<%=thisPage %>&order=12">&uarr;</a></th>
+    <th>createdAt <a href="/paginationGrid/?page=<%=thisPage %>&order=13">&uarr;</a></th>
+  </tr>
+  <% for(stud of student){ %>
+  <tr>
+    <td><%= stud.studId %></td>
+    <td><%= stud.firstName %></td>
+    <td><%= stud.lastName %></td>
+    <td><%= stud.gender %></td>
+    <td><%= stud.dateOfBirth %></td>
+    <td><%= stud.address1 %></td>
+    <td><%= stud.address2 %></td>
+    <td><%= stud.city %></td>
+    <td><%= stud.emailId %></td>
+    <td><%= stud.phone %></td>
+    <td><%= stud.state %></td>
+    <td><%= stud.zipCode %></td>
+    <td><%= stud.createdAt %></td>
+  </tr>
+  <% } %>
 </table>

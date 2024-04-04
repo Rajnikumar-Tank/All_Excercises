@@ -1,37 +1,41 @@
-.req::after{
-    content: "*This data is require!!";
-    color: orangered;
-    font-size: 14px;
-}
-.invalid ::after{
-    content: "*invalid Input!!";
-    color: red;
-    font-size: 12px;
-}
-input ~span{
-    color:red;
+.req::after {
+  content: "*This data is require!!";
+  color: orangered;
+  font-size: 14px;
 }
 
-#references a{
-    font-size: large;
-    background-color: rgb(2, 2, 2);
-    cursor: pointer;
-    color: white;
-    padding: 5px;
-}
-#references a:hover{
-    background-color: aqua;
-    color: black;
+.invalid ::after {
+  content: "*invalid Input!!";
+  color: red;
+  font-size: 12px;
 }
 
-#experience a{
-    cursor: pointer;
-    font-size: large;
-    background-color: rgb(2, 2, 2);
-    color: white;
-    padding: 5px;
+input~span {
+  color: red;
 }
-#experience a:hover{
-    background-color: aqua;
-    color: black;
+
+#references a {
+  font-size: large;
+  background-color: rgb(2, 2, 2);
+  cursor: pointer;
+  color: white;
+  padding: 5px;
+}
+
+#references a:hover {
+  background-color: aqua;
+  color: black;
+}
+
+#experience a {
+  cursor: pointer;
+  font-size: large;
+  background-color: rgb(2, 2, 2);
+  color: white;
+  padding: 5px;
+}
+
+#experience a:hover {
+  background-color: aqua;
+  color: black;
 }
