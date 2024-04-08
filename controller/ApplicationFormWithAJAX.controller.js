@@ -133,7 +133,7 @@ function getField(sql) {
 }
 // router.post('/insert', async (req, res) => {
 const ApplicationFormWithAJAXPostInsert = async (req, res) => {
-
+  console.log(req.body.hidden );
   if (req.body.hidden != undefined) {
     var data = req.body;
     console.log(data);
@@ -192,6 +192,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
     sql += " where AplicantId= " + data.hidden + ";";
     //console.log(sql);
     let update_output = await deletes(sql);
+    if (update_output <= -1) {
+
+      res.end('Something went Wrong!!');
+
+    }
     //console.log(update_output);
     let education1 = []
     let education2 = []
@@ -256,14 +261,24 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
     let education = [education1, education2, education3, education4].filter(e => e.length);
     sql = "delete  from educationMaster where AplicantId= " + data.hidden + ";";
     delete_output = await deletes(sql);
+    if (delete_output <= -1) {
+
+      res.end('Something went Wrong!!');
+
+    }
     if (education.length) {
       //console.log(deletes);
-      let sql1 = "INSERT INTO `jobAppDB29`.`educationMaster` (`AplicantId`,`BoardOrUni`, `course`, `passingYear`, `percentage`) VALUES ";
+      let sql1 = "INSERT INTO  `educationMaster` (`AplicantId`,`BoardOrUni`, `course`, `passingYear`, `percentage`) VALUES ";
       for (i in education) {
         sql1 += "(?),";
       }
       sql1 = sql1.substring(0, sql1.length - 1);
       var output = await insert(sql1, education);
+      if (output <= -1) {
+
+        res.end('Something went Wrong!!');
+  
+      }
     }
     var workExperience1 = []
     var workExperience = []
@@ -302,6 +317,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
         let sql3 = sql3_1 + sql3_2;
         //console.log(sql3)
         output = await insert(sql3, workExperience);
+        if (output <= -1) {
+
+          res.end('Something went Wrong!!');
+    
+        }
       }
     }
     var language1 = [];
@@ -394,6 +414,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
       sql4_2 = sql4_2.substring(0, sql4_2.length - 1);
       let sql4 = sql4_1 + sql4_2;
       output = await insert(sql4, language);
+      if (output <= -1) {
+
+        res.end('Something went Wrong!!');
+  
+      }
     }
     var technologies1 = [];
     var technologies2 = [];
@@ -501,7 +526,7 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
     sql = "Delete from technologies where AplicantId=" + data.hidden;
     delete_output = await deletes(sql)
     if (technologies.length) {
-      let sql5_1 = "INSERT INTO `jobAppDB29`.`technologies` (`AplicantId`, `technology`, `isBeginner`, `isMidiater`, `isExpert`) VALUES ";
+      let sql5_1 = "INSERT INTO  `technologies` (`AplicantId`, `technology`, `isBeginner`, `isMidiater`, `isExpert`) VALUES ";
       let sql5_2 = "";
       for (i in technologies) {
         sql5_2 += "(?),"
@@ -510,6 +535,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
       let sql5 = sql5_1 + sql5_2;
       //console.log(sql5);
       output = await insert(sql5, technologies);
+      if (output <= -1) {
+
+        res.end('Something went Wrong!!');
+  
+      }
     }
     var reference1 = [];
     var reference = [];
@@ -532,7 +562,7 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
       }
       reference = reference.filter(r => r.length);
       if (reference.length) {
-        let sql6_1 = "INSERT INTO `jobAppDB29`.`reference` (`AplicantId`, `name`, `contactNumber`, `relation`) VALUES"
+        let sql6_1 = "INSERT INTO  `reference` (`AplicantId`, `name`, `contactNumber`, `relation`) VALUES"
         let sql6_2 = "";
         for (i in reference) {
           sql6_2 += "(?),";
@@ -541,6 +571,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
         let sql6 = sql6_1 + sql6_2;
         //console.log(sql6);
         output = await insert(sql6, reference);
+        if (output <= -1) {
+
+          res.end('Something went Wrong!!');
+    
+        }
       }
     }
     let pereference = []
@@ -573,6 +608,9 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
 
     //console.log(sql)
     update_output = await deletes(sql);
+    if (update_output <= -1) {
+      res.end('Something went Wrong!!');
+    }
     //console.log(output);
     res.json('Your data Updated!!')
   } else {
@@ -682,7 +720,7 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
         education4.push(data.Percentage4);
       }
     }
-    let sql1 = "INSERT INTO `jobAppDB29`.`educationMaster` (`AplicantId`,`BoardOrUni`, `course`, `passingYear`, `percentage`) VALUES ";
+    let sql1 = "INSERT INTO  `educationMaster` (`AplicantId`,`BoardOrUni`, `course`, `passingYear`, `percentage`) VALUES ";
     let education = [[education1], [education2], [education3], [education4]].filter(e => e.length > 0);
     for (i of education) {
       if (i[0].length > 0)
@@ -690,7 +728,12 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
     }
     //console.log(sql1)
     sql1 = sql1.substring(0, sql1.length - 1);
-    var output = await insert(sql1, education)
+    var output = await insert(sql1, education);
+    if (output <= -1) {
+
+      res.end('Something went Wrong!!');
+
+    }
     var workExperience1 = []
     var workExperience = []
     //console.log('data:')
@@ -726,6 +769,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
       let sql3 = sql3_1 + sql3_2;
       //console.log(sql3)
       output = await insert(sql3, workExperience);
+      if (output <= -1) {
+
+        res.end('Something went Wrong!!');
+  
+      }
     }
 
     var language1 = [];
@@ -815,7 +863,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
     sql4_2 = sql4_2.substring(0, sql4_2.length - 1);
     let sql4 = sql4_1 + sql4_2;
     output = await insert(sql4, language);
+    if (output <= -1) {
 
+      res.end('Something went Wrong!!');
+
+    }
     var technologies1 = [];
     var technologies2 = [];
     var technologies3 = [];
@@ -919,7 +971,7 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
       }
     })
     let technologies = [technologies1, technologies2, technologies3, technologies4].filter(t => t.length);
-    let sql5_1 = "INSERT INTO `jobAppDB29`.`technologies` (`AplicantId`, `technology`, `isBeginner`, `isMidiater`, `isExpert`) VALUES ";
+    let sql5_1 = "INSERT INTO  `technologies` (`AplicantId`, `technology`, `isBeginner`, `isMidiater`, `isExpert`) VALUES ";
     let sql5_2 = "";
     for (i in technologies) {
       sql5_2 += "(?),"
@@ -928,6 +980,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
     let sql5 = sql5_1 + sql5_2;
     //console.log(sql5);
     output = await insert(sql5, technologies);
+    if (output <= -1) {
+
+      res.end('Something went Wrong!!');
+
+    }
     //console.log(data.name);
     var reference1 = [];
     var reference = [];
@@ -948,7 +1005,7 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
         reference1 = [];
       }
       reference = reference.filter(r => r.length);
-      let sql6_1 = "INSERT INTO `jobAppDB29`.`reference` (`AplicantId`, `name`, `contactNumber`, `relation`) VALUES"
+      let sql6_1 = "INSERT INTO  `reference` (`AplicantId`, `name`, `contactNumber`, `relation`) VALUES"
       let sql6_2 = "";
       for (i in reference) {
         sql6_2 += "(?),";
@@ -957,6 +1014,11 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
       let sql6 = sql6_1 + sql6_2;
       //console.log(sql6);
       output = await insert(sql6, reference);
+      if (output <= -1) {
+
+        res.end('Something went Wrong!!');
+  
+      }
     }
     let pereference = []
     if (data.preference_location) {
@@ -975,18 +1037,24 @@ const ApplicationFormWithAJAXPostInsert = async (req, res) => {
     if (data.department) {
       pereference.push(data.department)
     }
-    let sql7 = "INSERT INTO `jobAppDB29`.`preferances` (`AplicantId`, `prefere_location`, `noticePeriod`, `expactedCTC`, `currentCTC`, `department`) VALUES (?);"
+    let sql7 = "INSERT INTO  `preferances` (`AplicantId`, `prefere_location`, `noticePeriod`, `expactedCTC`, `currentCTC`, `department`) VALUES (?);"
 
     let pereferences = []
     pereferences.push(pereference)
-    output = await insert(sql7, pereferences)
+    console.log(pereferences);
+    output = await insert(sql7, pereferences);
+    if (output <= -1) {
+
+      res.end('Something went Wrong!!');
+
+    }
     if (output > -1) {
 
       res.json('Your are Successfully registered!!');
 
     }
     else {
-      res.json('Something went worng');
+      res.end('Something went worng');
     }
   }
 }

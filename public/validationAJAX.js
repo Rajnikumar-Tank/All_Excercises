@@ -10,10 +10,41 @@ validation[0] = () => {
     flag = true;
 
   }
+  if (!isAlpha(form['fname'].value)) {
+    if (form['fname'].parentNode.childNodes.length < 2) {
+
+      const span = document.createElement('span');
+      let text = "*Only Alphabet is valid!!"
+      span.append(text);
+      form['fname'].parentNode.appendChild(span);
+    }
+    if (first == null) first = form['fname'];
+    flag = true;
+  }
+  else {
+    if (form['fname'].parentNode.childNodes[1]) {
+      form['fname'].parentNode.childNodes[1].innerText = "";
+    }
+  }
   if (form['lname'].value.trim() == '') {
     form['lname'].parentNode.classList.add('req');
     if (first == null) first = form['lname'];
     flag = true;
+  }
+  if (!isAlpha(form['lname'].value)) {
+    if (form['lname'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Only Alphabet is valid!!"
+      span.append(text);
+      form['lname'].parentNode.appendChild(span);
+    }
+    if (first == null) first = form['lname'];
+    flag = true;
+  }
+  else {
+    if (form['lname'].parentNode.childNodes[1]) {
+      form['lname'].parentNode.childNodes[1].innerText = "";
+    }
   }
   if (form['Designation1'].value.trim() == '') {
     form['Designation1'].parentNode.classList.add('req');
@@ -25,15 +56,64 @@ validation[0] = () => {
     if (first == null) first = form['email'];
     flag = true;
   }
+  if (!isEmail(form['email'].value)) {
+    if (form['email'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Invalid EmailID!!"
+      span.append(text);
+      form['email'].parentNode.appendChild(span);
+    }
+    if (first == null) first = form['email'];
+    flag = true;
+  }
+  else {
+    if (form['email'].parentNode.childNodes[1]) {
+      form['email'].parentNode.childNodes[1].innerText = "";
+    }
+  }
   if (form['Phone'].value.trim() == '') {
     form['Phone'].parentNode.classList.add('req');
     if (first == null) first = form['Phone'];
     flag = true;
   }
+  if (!isPhone(form['Phone'].value)) {
+    if (form['Phone'].parentNode.childNodes.length < 2) {
+
+      const span = document.createElement('span');
+      let text = "*Invalid Phone number!!"
+      span.append(text);
+      form['Phone'].parentNode.appendChild(span);
+    }
+    if (first == null) first = form['Phone'];
+    flag = true;
+  }
+  else {
+    if (form['Phone'].parentNode.childNodes[1]) {
+      form['Phone'].parentNode.childNodes[1].innerText = "";
+    }
+  }
   if (form['dob'].value.trim() == '') {
     form['dob'].parentNode.classList.add('req');
     if (first == null) first = form['dob'];
     flag = true;
+  }
+
+  if (!isDate(form['dob'].value)) {
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (form['dob'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Enter date in dd/mm/yyyy formate!!"
+      span.append(text);
+      form['dob'].parentNode.appendChild(span);
+    }
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (first == null) first = form['dob'];
+    flag = true;
+  }
+  else {
+    if (form['dob'].parentNode.childNodes[1]) {
+      form['dob'].parentNode.childNodes[1].innerText = "";
+    }
   }
   if (form['Address1'].value.trim() == '') {
     form['Address1'].parentNode.classList.add('req');
@@ -60,98 +140,38 @@ validation[0] = () => {
     if (first == null) first = form['zcode'];
     flag = true;
   }
+  console.log(form['zcode'].value.length);
+  if ((form['zcode'].value.length) < 6 ) {
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (form['zcode'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Zip code only have 6 digits!!"
+      span.append(text);
+      form['zcode'].parentNode.appendChild(span);
+      console.log( form['zcode'].parentNode.childNodes)
+    }
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (first == null) first = form['zcode'];
+    flag = true;
+  }
+  else {
+    if (form['zcode'].parentNode.childNodes[1]) {
+      form['zcode'].parentNode.childNodes[1].innerText = "";
+    }
+  }
   if (form['gender'].value == "") {
     form['gender'][0].parentNode.classList.add('req');
-    if (first == null) first = form['gender'];
     flag = true;
   }
   if (form['relation'].value.trim() == '') {
     form['relation'].parentNode.classList.add('req');
-    if (first == null) first = form['relation'];
+    // if (first == null) first = form['relation'];
     flag = true;
-  }
-  if (!isEmail(form['email'].value)) {
-    if (form['email'].parentNode.childNodes.length < 2) {
-      const span = document.createElement('span');
-      let text = "*Invalid EmailID!!"
-      span.append(text);
-      form['email'].parentNode.appendChild(span);
-    }
-    form['email'].focus();
-    flag = true;
-  }
-  else {
-    if (form['email'].parentNode.childNodes[1]) {
-      form['email'].parentNode.childNodes[1].innerText = "";
-    }
-  }
-  if (!isPhone(form['Phone'].value)) {
-    if (form['Phone'].parentNode.childNodes.length < 2) {
-
-      const span = document.createElement('span');
-      let text = "*Invalid Phone number!!"
-      span.append(text);
-      form['Phone'].parentNode.appendChild(span);
-    }
-    form['Phone'].focus();
-    flag = true;
-  }
-  else {
-    if (form['Phone'].parentNode.childNodes[1]) {
-      form['Phone'].parentNode.childNodes[1].innerText = "";
-    }
-  }
-  if (!isAlpha(form['fname'].value)) {
-    if (form['fname'].parentNode.childNodes.length < 2) {
-
-      const span = document.createElement('span');
-      let text = "*Only Alphabet is valid!!"
-      span.append(text);
-      form['fname'].parentNode.appendChild(span);
-    }
-    form['fname'].focus();
-    flag = true;
-  }
-  else {
-    if (form['fname'].parentNode.childNodes[1]) {
-      form['fname'].parentNode.childNodes[1].innerText = "";
-    }
-  }
-  if (!isAlpha(form['lname'].value)) {
-    if (form['lname'].parentNode.childNodes.length < 2) {
-      const span = document.createElement('span');
-      let text = "*Only Alphabet is valid!!"
-      span.append(text);
-      form['lname'].parentNode.appendChild(span);
-    }
-    form['lname'].focus();
-    flag = true;
-  }
-  else {
-    if (form['lname'].parentNode.childNodes[1]) {
-      form['lname'].parentNode.childNodes[1].innerText = "";
-    }
-  }
-  if (!isDate(form['dob'].value)) {
-    // console.log(form['dob'].parentNode.childNodes.length);
-    if (form['dob'].parentNode.childNodes.length < 2) {
-      const span = document.createElement('span');
-      let text = "*Enter date in dd/mm/yyyy formate!!"
-      span.append(text);
-      form['dob'].parentNode.appendChild(span);
-    }
-    // console.log(form['dob'].parentNode.childNodes.length);
-    form['dob'].focus();
-    flag = true;
-  }
-  else {
-    if (form['dob'].parentNode.childNodes[1]) {
-      form['dob'].parentNode.childNodes[1].innerText = "";
-    }
   }
   if (flag) {
     errorSolve();
-    first.focus();
+    console.log(first)
+    if(first)first.focus();
     return false;
   }
   return true;
@@ -165,17 +185,53 @@ validation[1] = () => {
     if (first == null) first = form['gBoard'];
     flag = true;
   }
+ 
   if (form['PassingY1'].value == "") {
     form['PassingY1'].parentNode.classList.add('req');
     if (first == null) first = form['PassingY1'];
     flag = true;
+  }
+  if ((form['PassingY1'].value.length) < 4 || parseInt(form['PassingY1'].value) > new Date().getFullYear() ) {
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (form['PassingY1'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Passing year only have 4 digits and below current year!!"
+      span.append(text);
+      form['PassingY1'].parentNode.appendChild(span);
+      console.log( form['PassingY1'].parentNode.childNodes)
+    }
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (first == null) first = form['PassingY1'];
+    flag = true;
+  }
+  else {
+    if (form['PassingY1'].parentNode.childNodes[1]) {
+      form['PassingY1'].parentNode.childNodes[1].remove();
+    }
   }
   if (form['Percentage1'].value == "") {
     form['Percentage1'].parentNode.classList.add('req');
     if (first == null) first = form['Percentage1'];
     flag = true;
   }
-
+  if (!(parseFloat(form['Percentage1'].value) > 0 && parseFloat(form['Percentage1'].value) < 100 ) ) {
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (form['Percentage1'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Percentage only between 0 to 100!!"
+      span.append(text);
+      form['Percentage1'].parentNode.appendChild(span);
+      console.log( form['Percentage1'].parentNode.childNodes)
+    }
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (first == null) first = form['Percentage1'];
+    flag = true;
+  }
+  else {
+    if (form['Percentage1'].parentNode.childNodes[1]) {
+      form['Percentage1'].parentNode.childNodes[1].remove();
+    }
+  }
   if (form['Board2'].value == "") {
     form['Board2'].parentNode.classList.add('req');
     if (first == null) first = form['Board2'];
@@ -186,10 +242,46 @@ validation[1] = () => {
     if (first == null) first = form['PassingY2'];
     flag = true;
   }
+  if ((form['PassingY2'].value.length) < 4 || parseInt(form['PassingY2'].value) > new Date().getFullYear() ) {
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (form['PassingY2'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Passing year only have 4 digits and below current year!!"
+      span.append(text);
+      form['PassingY2'].parentNode.appendChild(span);
+      console.log( form['PassingY2'].parentNode.childNodes)
+    }
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (first == null) first = form['PassingY2'];
+    flag = true;
+  }
+  else {
+    if (form['PassingY2'].parentNode.childNodes[1]) {
+      form['PassingY2'].parentNode.childNodes[1].remove();
+    }
+  }
   if (form['Percentage2'].value == "") {
     form['Percentage2'].parentNode.classList.add('req');
     if (first == null) first = form['Percentage2'];
     flag = true;
+  }
+  if (!(parseFloat(form['Percentage2'].value) > 0 && parseFloat(form['Percentage2'].value) < 100 ) ) {
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (form['Percentage2'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Percentage only between 0 to 100!!"
+      span.append(text);
+      form['Percentage2'].parentNode.appendChild(span);
+      console.log( form['Percentage2'].parentNode.childNodes)
+    }
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (first == null) first = form['Percentage2'];
+    flag = true;
+  }
+  else {
+    if (form['Percentage2'].parentNode.childNodes[1]) {
+      form['Percentage2'].parentNode.childNodes[1].remove();
+    }
   }
   if (form['Course1'].value == "") {
     form['Course1'].parentNode.classList.add('req');
@@ -206,10 +298,46 @@ validation[1] = () => {
     if (first == null) first = form['PassingY3'];
     flag = true;
   }
+  if ((form['PassingY3'].value.length) < 4 || parseInt(form['PassingY3'].value) > new Date().getFullYear() ) {
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (form['PassingY3'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Passing year only have 4 digits and below current year!!"
+      span.append(text);
+      form['PassingY3'].parentNode.appendChild(span);
+      console.log( form['PassingY3'].parentNode.childNodes)
+    }
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (first == null) first = form['PassingY3'];
+    flag = true;
+  }
+  else {
+    if (form['PassingY3'].parentNode.childNodes[1]) {
+      form['PassingY3'].parentNode.childNodes[1].remove();
+    }
+  }
   if (form['Percentage3'].value == "") {
     form['Percentage3'].parentNode.classList.add('req');
     if (first == null) first = form['Percentage3'];
     flag = true;
+  }
+  if (!(parseFloat(form['Percentage3'].value) > 0 && parseFloat(form['Percentage3'].value) < 100 ) ) {
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (form['Percentage3'].parentNode.childNodes.length < 2) {
+      const span = document.createElement('span');
+      let text = "*Percentage only between 0 to 100!!"
+      span.append(text);
+      form['Percentage3'].parentNode.appendChild(span);
+      console.log( form['Percentage3'].parentNode.childNodes)
+    }
+    // console.log(form['dob'].parentNode.childNodes.length);
+    if (first == null) first = form['Percentage3'];
+    flag = true;
+  }
+  else {
+    if (form['Percentage3'].parentNode.childNodes[1]) {
+      form['Percentage3'].parentNode.childNodes[1].remove();
+    }
   }
   if (form['Course2'] != undefined) {
 
@@ -230,10 +358,52 @@ validation[1] = () => {
         if (first == null) first = form['PassingY4'];
         flag = true;
       }
+      if ((form['PassingY4'].value.length) < 4 || parseInt(form['PassingY4'].value) > new Date().getFullYear() ) {
+        // console.log(form['dob'].parentNode.childNodes.length);
+        if (form['PassingY4'].parentNode.childNodes.length < 2) {
+          const span = document.createElement('span');
+          let text = "*Passing year only have 4 digits and below current year!!"
+          span.append(text);
+          form['PassingY4'].parentNode.appendChild(span);
+          console.log( form['PassingY4'].parentNode.childNodes)
+        }
+        // console.log(form['dob'].parentNode.childNodes.length);
+        if (first == null) first = form['PassingY4'];
+        flag = true;
+      }
+      else {
+        if (form['PassingY4'].parentNode.childNodes[1]) {
+          form['PassingY4'].parentNode.childNodes[1].remove();
+        }
+      }
       if (form['Percentage4'].value == "") {
         form['Percentage4'].parentNode.classList.add('req');
         if (first == null) first = form['Percentage4'];
         flag = true;
+      }
+      if (!(parseFloat(form['Percentage4'].value) > 0 && parseFloat(form['Percentage4'].value) < 100 ) ) {
+        // console.log(form['dob'].parentNode.childNodes.length);
+        if (form['Percentage4'].parentNode.childNodes.length < 2) {
+          const span = document.createElement('span');
+          let text = "*Percentage only between 0 to 100!!"
+          span.append(text);
+          form['Percentage4'].parentNode.appendChild(span);
+          console.log( form['Percentage4'].parentNode.childNodes)
+        }
+        // console.log(form['dob'].parentNode.childNodes.length);
+        if (first == null) first = form['Percentage4'];
+        flag = true;
+      }
+      else {
+        if (form['Percentage4'].parentNode.childNodes[1]) {
+          form['Percentage4'].parentNode.childNodes[1].remove();
+        }
+      }
+    }
+    else{
+  
+      if (form['Percentage4'].parentNode.childNodes[1]) {
+        form['Percentage4'].parentNode.childNodes[1].remove();
       }
     }
   }
@@ -268,11 +438,45 @@ validation[2] = () => {
           if (first == null) first = form['From[]'][i];
           flag = true;
         }
+        if (!isDate(form['From[]'][i].value)) {
+          // console.log(form['dob'].parentNode.childNodes.length);
+          if (form['From[]'][i].parentNode.childNodes.length < 2) {
+            const span = document.createElement('span');
+            let text = "*Enter date in dd/mm/yyyy formate!!"
+            span.append(text);
+            form['From[]'][i].parentNode.appendChild(span);
+          }
+          // console.log(form['dob'].parentNode.childNodes.length);
+          if (first == null) first = form['From[]'][i];
+          flag = true;
+        }
+        else {
+          if (form['From[]'][i].parentNode.childNodes[1]) {
+            form['From[]'][i].parentNode.childNodes[1].remove();
+          }
+        }
         if (form['To[]'][i].value == "") {
           form['To[]'][i].parentNode.classList.add('req');
           if (first == null) first = form['To[]'][i];
           flag = true;
         }
+        // if (!isDate(form['To[]'][i].value)) {
+        //   // console.log(form['dob'].parentNode.childNodes.length);
+        //   if (form['To[]'][i].parentNode.childNodes.length < 2) {
+        //     const span = document.createElement('span');
+        //     let text = "*Enter date in dd/mm/yyyy formate!!"
+        //     span.append(text);
+        //     form['To[]'][i].parentNode.appendChild(span);
+        //   }
+        //   // console.log(form['dob'].parentNode.childNodes.length);
+        //   if (first == null) first = form['To[]'][i];
+        //   flag = true;
+        // }
+        // else {
+        //   if (form['To[]'][i].parentNode.childNodes[1]) {
+        //     form['To[]'][i].parentNode.childNodes[1].remove();
+        //   }
+        // }
       }
     }
   }
@@ -294,12 +498,51 @@ validation[2] = () => {
         if (first == null) first = form['From[]'];
         flag = true;
       }
+      
       if (form['To[]'].value == "") {
         form['To[]'].parentNode.classList.add('req');
         if (first == null) first = form['To[]'];
         flag = true;
       }
+      
     }
+    // else{
+
+    //   if (!isDate(form['From[]'].value)) {
+    //     // console.log(form['dob'].parentNode.childNodes.length);
+    //     if (form['From[]'].parentNode.childNodes.length < 2) {
+    //       const span = document.createElement('span');
+    //       let text = "*Enter date in dd/mm/yyyy formate!!"
+    //       span.append(text);
+    //       form['From[]'].parentNode.appendChild(span);
+    //     }
+    //     // console.log(form['dob'].parentNode.childNodes.length);
+    //     if (first == null) first = form['From[]'];
+    //     flag = true;
+    //   }
+    //   else {
+    //     if (form['From[]'].parentNode.childNodes[1]) {
+    //       form['From[]'].parentNode.childNodes[1].remove();
+    //     }
+    //   }
+      // if (!isDate(form['To[]'].value)) {
+      //   // console.log(form['dob'].parentNode.childNodes.length);
+      //   if (form['To[]'].parentNode.childNodes.length < 2) {
+      //     const span = document.createElement('span');
+      //     let text = "*Enter date in dd/mm/yyyy formate!!"
+      //     span.append(text);
+      //     form['To[]'].parentNode.appendChild(span);
+      //   }
+      //   // console.log(form['dob'].parentNode.childNodes.length);
+      //   if (first == null) first = form['To[]'];
+      //   flag = true;
+      // }
+      // else {
+      //   if (form['To[]'].parentNode.childNodes[1]) {
+      //     form['To[]'].parentNode.childNodes[1].remove();
+      //   }
+      // }
+    // }
   }
   if (flag) {
     errorSolve();
@@ -352,7 +595,24 @@ validation[5] = () => {
         flag = true;
       }
     }
-
+  //   else{
+  //     if (!isPhone(form['refrePhone[]'].value)) {
+  //       if (form['refrePhone[]'].parentNode.childNodes.length < 2) {
+    
+  //         const span = document.createElement('span');
+  //         let text = "*Invalid Phone number!!"
+  //         span.append(text);
+  //         form['refrePhone[]'].parentNode.appendChild(span);
+  //       }
+  //       if (first == null) first = form['refrePhone[]'];
+  //       flag = true;
+  //     }
+  //     else {
+  //       if (form['refrePhone[]'].parentNode.childNodes[1]) {
+  //         form['refrePhone[]'].parentNode.childNodes[1].innerText = "";
+  //       }
+  //     }
+  //   }
   }
   if (flag) {
     errorSolve();
@@ -364,6 +624,7 @@ validation[5] = () => {
 validation[6] = () => {
   var flag = false;
   var first = null;
+  console.log(form['preference_location'].value + "here");
   if (form['preference_location'].value == "") {
     form['preference_location'].parentNode.classList.add('req');
     if (first == null) first = form['preference_location']

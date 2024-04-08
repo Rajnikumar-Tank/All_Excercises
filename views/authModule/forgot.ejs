@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <form id="forgot" name="forgot">
+  <form id="forgot" name="forgot" onsubmit="return false">
     <table>
       <tr>
         <td><label for="email">Email Id:</label></td>
@@ -17,12 +17,20 @@
       </tr>
       <tr>
         <td colspan="2">
-          <p onclick="updatePassword()" class="btn">Generate new password link</p>
+          <p onclick="updatePassword()" tabindex="0" id="up" class="btn">Generate new password link</p>
         </td>
       </tr>
     </table>
   </form>
   <script>
+    const p = document.getElementById('up');
+    p.onkeypress = (e) => {
+      console.log(e)
+      if (e.which == 13) {
+        p.dispatchEvent(new Event('click'));
+      }
+    };
+
     function require() {
       const form = document.forms['forgot'];
       const input = document.getElementsByTagName('input');

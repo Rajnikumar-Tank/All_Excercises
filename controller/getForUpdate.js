@@ -7,6 +7,7 @@ function getForUpdate(sql) {
         console.error("getForUpdate Error:" + err);
         reject(err);
       }
+      console.log(result);
       return resolve(result);
     })
   })

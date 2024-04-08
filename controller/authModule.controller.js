@@ -129,7 +129,7 @@ const authModuleLoginPost = async (req, res) => {
   let result = await executeDML(sql);
   console.log(result[0]);
   let jwt_token = jwt.sign({ email: data.email }, process.env.SECRET, {
-    expiresIn: "20m",
+    expiresIn: "10h",
   })
   console.log(jwt_token)
   if (result[0]) {

@@ -14,7 +14,7 @@
     }
 
     #cells {
-      opacity: 0.80;
+      opacity: 0.70;
     }
 
     body {
@@ -29,9 +29,40 @@
       width: 350px;
     }
 
-    #score {
+    .btn {
+      text-decoration: none;
+      background-color: rgb(13, 13, 13);
+      color: azure;
+      width: 40%;
+      cursor: pointer;
+      padding: 20px 10px;
+      margin: 0 auto;
+      border-radius: 5px;
+      box-shadow: -5px 5px 5px rgba(4, 4, 4, 0.656);
+
+    }
+
+    .btn:hover {
+      background-color: rgba(0, 0, 0, 0.493);
+      color: rgb(10, 10, 10);
+    }
+
+    .btn:active {
+      background-color: rgb(5, 5, 5);
+      color: rgb(255, 255, 255);
+    }
+
+    #score #result #result2 {
       font-family: 'Courier New', Courier, monospace;
       font-size: large;
+    }
+
+    h4 {
+      color: red;
+    }
+
+    h3 {
+      color: rgb(11, 181, 13);
     }
   </style>
 
@@ -58,12 +89,14 @@
     <p id="result"></p>
     <p id="result2"></p>
     <br>
-    <button onclick="reset()"><a href="KUKUKUBE">Restart</a></button>
+    <a class="btn" href="/KUKUKUBE">Restart</a>
 
   </center>
   <script>
     var count = 0;
-    localStorage.setItem('count', count);
+    if (!localStorage.getItem('count')) {
+      localStorage.setItem('count', count);
+    }
     var time = 31;
     var timer = setInterval(function() {
       var displayTime = document.getElementById('time');
@@ -73,22 +106,21 @@
       } else {
         var displayResult = document.getElementById('result');
         var displayResult2 = document.getElementById('result2');
-
+        displayResult.innerHTML = "<h4>Game Over</h4>"
         console.log(localStorage.getItem('count'));
         try {
           if (localStorage.getItem('count') < count) {
             console.log(localStorage.getItem('count'));
 
             localStorage.setItem('count', count);
-            displayResult.innerHTML = "Your Score is " + count;
+            displayResult.innerHTML += "<h3>Your New High Score is " + count + "</h3>";
           } else {
-            displayResult.innerHTML = "Your Score is " + count;
-
+            displayResult.innerHTML += "<h3>Your Score is " + count + "</h3>";
+            displayResult2.innerHTML = "<h3>Your High Score is " + localStorage.getItem('count') + "</h3>";
           }
           clearInterval(timer);
         } catch (e) {
           localStorage.setItem('count', count);
-
         }
 
       }
@@ -150,7 +182,7 @@
       }
       var row = tbl.insertRow(-1);
       for (i = 0; i < colcount; i++) {
-        row.insertCell(0);
+        row.insertCell(i);
       }
     }
   </script>

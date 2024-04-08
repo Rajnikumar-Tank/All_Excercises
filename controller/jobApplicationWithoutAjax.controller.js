@@ -163,7 +163,7 @@ const jobApplicationWithoutAjaxInsertPost = async (req, res) => {
 		delete_output = await deletes(sql);
 		if (education.length) {
 			console.log(deletes);
-			let sql1 = "INSERT INTO `jobAppDB29`.`educationMaster` (`AplicantId`,`BoardOrUni`, `course`, `passingYear`, `percentage`) VALUES ";
+			let sql1 = "INSERT INTO `educationMaster` (`AplicantId`,`BoardOrUni`, `course`, `passingYear`, `percentage`) VALUES ";
 			for (i in education) {
 				sql1 += "(?),";
 			}
@@ -172,277 +172,285 @@ const jobApplicationWithoutAjaxInsertPost = async (req, res) => {
 		}
 		var workExperience1 = []
 		var workExperience = []
-		for (let i = 0; i < data.Company.length; i++) {
-			workExperience1.push(data.hidden);
-			if (data.Company[i]) {
-				workExperience1.push(data.Company[i]);
-			}
-			if (data.Designation[i]) {
+		if (data.Company != undefined) {
+			for (let i = 0; i < data.Company.length; i++) {
+				workExperience1.push(data.hidden);
+				if (data.Company[i]) {
+					workExperience1.push(data.Company[i]);
+				}
+				if (data.Designation[i]) {
 
-				workExperience1.push(data.Designation[i]);
+					workExperience1.push(data.Designation[i]);
+				}
+				if (data.From[i]) {
+					workExperience1.push(data.From[i].split('/').reverse().join('-'));
+				}
+				if (data.To[i]) {
+					workExperience1.push(data.To[i].split('/').reverse().join('-'));
+				}
+				workExperience.push(workExperience1);
+				workExperience1 = [];
 			}
-			if (data.From[i]) {
-				workExperience1.push(data.From[i].split('/').reverse().join('-'));
+			workExperience = workExperience.filter(w => w.length)
+			sql = "delete from workExperience where AplicantId=" + data.hidden;
+			delete_output = await deletes(sql);
+			if (workExperience.length) {
+				console.log('experience:')
+				console.log(workExperience)
+				let sql3_1 = "insert into workExperience (`AplicantId`, `companyName`, `Designation`, `fromDate`, `toDate`) values ";
+				let sql3_2 = "";
+				for (i of workExperience) {
+					sql3_2 += "(?),"
+				}
+				sql3_2 = sql3_2.substring(0, sql3_2.length - 1);
+				let sql3 = sql3_1 + sql3_2;
+				console.log(sql3)
+				output = await insert(sql3, workExperience);
 			}
-			if (data.To[i]) {
-				workExperience1.push(data.To[i].split('/').reverse().join('-'));
-			}
-			workExperience.push(workExperience1);
-			workExperience1 = [];
 		}
-		workExperience = workExperience.filter(w => w.length)
-		sql = "delete from workExperience where AplicantId=" + data.hidden;
-		delete_output = await deletes(sql);
-		if (workExperience.length) {
-			console.log('experience:')
-			console.log(workExperience)
-			let sql3_1 = "insert into workExperience (`AplicantId`, `companyName`, `Designation`, `fromDate`, `toDate`) values ";
-			let sql3_2 = "";
-			for (i of workExperience) {
-				sql3_2 += "(?),"
-			}
-			sql3_2 = sql3_2.substring(0, sql3_2.length - 1);
-			let sql3 = sql3_1 + sql3_2;
-			console.log(sql3)
-			output = await insert(sql3, workExperience);
-		}
-
 		var language1 = [];
 		var language2 = [];
 		var language3 = [];
-		data.language.forEach(ele => {
-			if (ele == 'hindi') {
-				language1.push(data.hidden);
-				language1.push('Hindi')
-				if (data.hindi) {
-					if (data.hindi.indexOf('readHindi') != -1) {
-						language1.push(1);
-					}
-					else {
-						language1.push(0);
-					}
-					if (data.hindi.indexOf('writeHindi') != -1) {
-						language1.push(1);
-					}
-					else {
-						language1.push(0);
-					}
-					if (data.hindi.indexOf('SpeakHindi') != -1) {
-						language1.push(1);
-					}
-					else {
-						language1.push(0);
-					}
-				}
-			}
-			if (ele == 'gujarati') {
-				language2.push(data.hidden);
-				language2.push('Gujarati')
-				if (data.gujarati) {
-					if (data.gujarati.indexOf('readGujarati') != -1) {
-						language2.push(1);
-					}
-					else {
-						language2.push(0);
-					}
-					if (data.gujarati.indexOf('writeGujarati') != -1) {
-						language2.push(1);
-					}
-					else {
-						language2.push(0);
-					}
-					if (data.gujarati.indexOf('SpeakGujarati') != -1) {
-						language2.push(1);
-					}
-					else {
-						language2.push(0);
+		if (data.language != undefined) {
+
+			data.language.forEach(ele => {
+				if (ele == 'hindi') {
+					language1.push(data.hidden);
+					language1.push('Hindi')
+					if (data.hindi) {
+						if (data.hindi.indexOf('readHindi') != -1) {
+							language1.push(1);
+						}
+						else {
+							language1.push(0);
+						}
+						if (data.hindi.indexOf('writeHindi') != -1) {
+							language1.push(1);
+						}
+						else {
+							language1.push(0);
+						}
+						if (data.hindi.indexOf('SpeakHindi') != -1) {
+							language1.push(1);
+						}
+						else {
+							language1.push(0);
+						}
 					}
 				}
-			}
-			if (ele == 'english') {
-				language3.push(data.hidden);
-				language3.push('english')
-				if (data.english) {
-					if (data.english.indexOf('readEnglish') != -1) {
-						language3.push(1);
-					}
-					else {
-						language3.push(0);
-					}
-					if (data.english.indexOf('writeEnglish') != -1) {
-						language3.push(1);
-					}
-					else {
-						language3.push(0);
-					}
-					if (data.english.indexOf('SpeakEnglish') != -1) {
-						language3.push(1);
-					}
-					else {
-						language3.push(0);
+				if (ele == 'gujarati') {
+					language2.push(data.hidden);
+					language2.push('Gujarati')
+					if (data.gujarati) {
+						if (data.gujarati.indexOf('readGujarati') != -1) {
+							language2.push(1);
+						}
+						else {
+							language2.push(0);
+						}
+						if (data.gujarati.indexOf('writeGujarati') != -1) {
+							language2.push(1);
+						}
+						else {
+							language2.push(0);
+						}
+						if (data.gujarati.indexOf('SpeakGujarati') != -1) {
+							language2.push(1);
+						}
+						else {
+							language2.push(0);
+						}
 					}
 				}
+				if (ele == 'english') {
+					language3.push(data.hidden);
+					language3.push('english')
+					if (data.english) {
+						if (data.english.indexOf('readEnglish') != -1) {
+							language3.push(1);
+						}
+						else {
+							language3.push(0);
+						}
+						if (data.english.indexOf('writeEnglish') != -1) {
+							language3.push(1);
+						}
+						else {
+							language3.push(0);
+						}
+						if (data.english.indexOf('SpeakEnglish') != -1) {
+							language3.push(1);
+						}
+						else {
+							language3.push(0);
+						}
+					}
+				}
+			})
+			let language = [language1, language2, language3].filter(l => l.length);
+			sql = 'delete from languages where AplicantId=' + data.hidden;
+			delete_output = await deletes(sql);
+			if (language.length) {
+				console.log(language);
+				let sql4_1 = "insert into languages(`AplicantId`, `language`, `isRead`, `isWrite`, `isSpeak`) values"
+				let sql4_2 = "";
+				for (i of language) {
+					sql4_2 += "(?),"
+				}
+				sql4_2 = sql4_2.substring(0, sql4_2.length - 1);
+				let sql4 = sql4_1 + sql4_2;
+				output = await insert(sql4, language);
 			}
-		})
-		let language = [language1, language2, language3].filter(l => l.length);
-		sql = 'delete from languages where AplicantId=' + data.hidden;
-		delete_output = await deletes(sql);
-		if (language.length) {
-			console.log(language);
-			let sql4_1 = "insert into languages(`AplicantId`, `language`, `isRead`, `isWrite`, `isSpeak`) values"
-			let sql4_2 = "";
-			for (i of language) {
-				sql4_2 += "(?),"
-			}
-			sql4_2 = sql4_2.substring(0, sql4_2.length - 1);
-			let sql4 = sql4_1 + sql4_2;
-			output = await insert(sql4, language);
 		}
 		var technologies1 = [];
 		var technologies2 = [];
 		var technologies3 = [];
 		var technologies4 = [];
-		data.technologies.forEach(ele => {
-			if (ele == 'php') {
-				technologies1.push(data.hidden);
-				technologies1.push('php')
-				if (data.php) {
-					if (data.php.indexOf('BeginerPHP') != -1) {
-						technologies1.push(1);
-					}
-					else {
-						technologies1.push(0);
-					}
-					if (data.php.indexOf('MideaterPHP') != -1) {
-						technologies1.push(1);
-					}
-					else {
-						technologies1.push(0);
-					}
-					if (data.php.indexOf('ExpertPHP') != -1) {
-						technologies1.push(1);
-					}
-					else {
-						technologies1.push(0);
-					}
-				}
-			}
-			if (ele == 'mysql') {
-				technologies2.push(data.hidden);
-				technologies2.push('MYsql')
-				if (data.mysql) {
-					if (data.mysql.indexOf('BeginerMysql') != -1) {
-						technologies2.push(1);
-					}
-					else {
-						technologies2.push(0);
-					}
-					if (data.mysql.indexOf('MideaterMysql') != -1) {
-						technologies2.push(1);
-					}
-					else {
-						technologies2.push(0);
-					}
-					if (data.mysql.indexOf('ExpertMysql') != -1) {
-						technologies2.push(1);
-					}
-					else {
-						technologies2.push(0);
+		if (data.technologies != undefined) {
+			data.technologies.forEach(ele => {
+				if (ele == 'php') {
+					technologies1.push(data.hidden);
+					technologies1.push('php')
+					if (data.php) {
+						if (data.php.indexOf('BeginerPHP') != -1) {
+							technologies1.push(1);
+						}
+						else {
+							technologies1.push(0);
+						}
+						if (data.php.indexOf('MideaterPHP') != -1) {
+							technologies1.push(1);
+						}
+						else {
+							technologies1.push(0);
+						}
+						if (data.php.indexOf('ExpertPHP') != -1) {
+							technologies1.push(1);
+						}
+						else {
+							technologies1.push(0);
+						}
 					}
 				}
-			}
-			if (ele == 'laravel') {
-				technologies3.push(data.hidden);
-				technologies3.push('Laravel')
-				if (data.laravel) {
-					if (data.laravel.indexOf('BeginerLaravel') != -1) {
-						technologies3.push(1);
-					}
-					else {
-						technologies3.push(0);
-					}
-					if (data.laravel.indexOf('MideaterLaravel') != -1) {
-						technologies3.push(1);
-					}
-					else {
-						technologies3.push(0);
-					}
-					if (data.laravel.indexOf('ExpertLaravel') != -1) {
-						technologies3.push(1);
-					}
-					else {
-						technologies3.push(0);
-					}
-				}
-			}
-			if (ele == 'Oracle') {
-				technologies4.push(data.hidden);
-				technologies4.push('Oracle')
-				if (data.Oracle) {
-					if (data.Oracle.indexOf('BeginerOracle') != -1) {
-						technologies4.push(1);
-					}
-					else {
-						technologies4.push(0);
-					}
-					if (data.Oracle.indexOf('MideaterOracle') != -1) {
-						technologies4.push(1);
-					}
-					else {
-						technologies4.push(0);
-					}
-					if (data.Oracle.indexOf('ExpertOracle') != -1) {
-						technologies4.push(1);
-					}
-					else {
-						technologies4.push(0);
+				if (ele == 'mysql') {
+					technologies2.push(data.hidden);
+					technologies2.push('MYsql')
+					if (data.mysql) {
+						if (data.mysql.indexOf('BeginerMysql') != -1) {
+							technologies2.push(1);
+						}
+						else {
+							technologies2.push(0);
+						}
+						if (data.mysql.indexOf('MideaterMysql') != -1) {
+							technologies2.push(1);
+						}
+						else {
+							technologies2.push(0);
+						}
+						if (data.mysql.indexOf('ExpertMysql') != -1) {
+							technologies2.push(1);
+						}
+						else {
+							technologies2.push(0);
+						}
 					}
 				}
+				if (ele == 'laravel') {
+					technologies3.push(data.hidden);
+					technologies3.push('Laravel')
+					if (data.laravel) {
+						if (data.laravel.indexOf('BeginerLaravel') != -1) {
+							technologies3.push(1);
+						}
+						else {
+							technologies3.push(0);
+						}
+						if (data.laravel.indexOf('MideaterLaravel') != -1) {
+							technologies3.push(1);
+						}
+						else {
+							technologies3.push(0);
+						}
+						if (data.laravel.indexOf('ExpertLaravel') != -1) {
+							technologies3.push(1);
+						}
+						else {
+							technologies3.push(0);
+						}
+					}
+				}
+				if (ele == 'Oracle') {
+					technologies4.push(data.hidden);
+					technologies4.push('Oracle')
+					if (data.Oracle) {
+						if (data.Oracle.indexOf('BeginerOracle') != -1) {
+							technologies4.push(1);
+						}
+						else {
+							technologies4.push(0);
+						}
+						if (data.Oracle.indexOf('MideaterOracle') != -1) {
+							technologies4.push(1);
+						}
+						else {
+							technologies4.push(0);
+						}
+						if (data.Oracle.indexOf('ExpertOracle') != -1) {
+							technologies4.push(1);
+						}
+						else {
+							technologies4.push(0);
+						}
+					}
+				}
+			})
+			let technologies = [technologies1, technologies2, technologies3, technologies4].filter(t => t.length);
+			sql = "Delete from technologies where AplicantId=" + data.hidden;
+			delete_output = await deletes(sql)
+			if (technologies.length) {
+				let sql5_1 = "INSERT INTO `technologies` (`AplicantId`, `technology`, `isBeginner`, `isMidiater`, `isExpert`) VALUES ";
+				let sql5_2 = "";
+				for (i in technologies) {
+					sql5_2 += "(?),"
+				}
+				sql5_2 = sql5_2.substring(0, sql5_2.length - 1);
+				let sql5 = sql5_1 + sql5_2;
+				console.log(sql5);
+				output = await insert(sql5, technologies);
 			}
-		})
-		let technologies = [technologies1, technologies2, technologies3, technologies4].filter(t => t.length);
-		sql = "Delete from technologies where AplicantId=" + data.hidden;
-		delete_output = await deletes(sql)
-		if (technologies.length) {
-			let sql5_1 = "INSERT INTO `jobAppDB29`.`technologies` (`AplicantId`, `technology`, `isBeginner`, `isMidiater`, `isExpert`) VALUES ";
-			let sql5_2 = "";
-			for (i in technologies) {
-				sql5_2 += "(?),"
-			}
-			sql5_2 = sql5_2.substring(0, sql5_2.length - 1);
-			let sql5 = sql5_1 + sql5_2;
-			console.log(sql5);
-			output = await insert(sql5, technologies);
 		}
 		var reference1 = [];
 		var reference = [];
-		for (let i = 0; i < data.name.length; i++) {
-			if (data.name[i]) {
-				reference1.push(data.hidden);
-				reference1.push(data.name[i])
+		if (data.name != undefined) {
+			for (let i = 0; i < data.name.length; i++) {
+				if (data.name[i]) {
+					reference1.push(data.hidden);
+					reference1.push(data.name[i])
+				}
+				if (data.refrePhone[i]) {
+					reference1.push(data.refrePhone[i])
+				}
+				if (data.Relation[i]) {
+					reference1.push(data.Relation[i])
+				}
+				reference.push(reference1);
+				reference1 = [];
 			}
-			if (data.refrePhone[i]) {
-				reference1.push(data.refrePhone[i])
+			reference = reference.filter(r => r.length);
+			sql = 'delete from reference where AplicantId=' + data.hidden;
+			delete_output = await deletes(sql);
+			if (reference.length) {
+				let sql6_1 = "INSERT INTO `reference` (`AplicantId`, `name`, `contactNumber`, `relation`) VALUES"
+				let sql6_2 = "";
+				for (i in reference) {
+					sql6_2 += "(?),";
+				}
+				sql6_2 = sql6_2.substring(0, sql6_2.length - 1);
+				let sql6 = sql6_1 + sql6_2;
+				console.log(sql6);
+				output = await insert(sql6, reference);
 			}
-			if (data.Relation[i]) {
-				reference1.push(data.Relation[i])
-			}
-			reference.push(reference1);
-			reference1 = [];
-		}
-		reference = reference.filter(r => r.length);
-		sql = 'delete from reference where AplicantId=' + data.hidden;
-		delete_output = await deletes(sql);
-		if (reference.length) {
-			let sql6_1 = "INSERT INTO `jobAppDB29`.`reference` (`AplicantId`, `name`, `contactNumber`, `relation`) VALUES"
-			let sql6_2 = "";
-			for (i in reference) {
-				sql6_2 += "(?),";
-			}
-			sql6_2 = sql6_2.substring(0, sql6_2.length - 1);
-			let sql6 = sql6_1 + sql6_2;
-			console.log(sql6);
-			output = await insert(sql6, reference);
 		}
 		let pereference = []
 		if (data.preference_location) {
@@ -580,7 +588,7 @@ const jobApplicationWithoutAjaxInsertPost = async (req, res) => {
 		if (data.Percentage4) {
 			education4.push(data.Percentage4);
 		}
-		let sql1 = "INSERT INTO `jobAppDB29`.`educationMaster` (`AplicantId`,`BoardOrUni`, `course`, `passingYear`, `percentage`) VALUES (?);";
+		let sql1 = "INSERT INTO `educationMaster` (`AplicantId`,`BoardOrUni`, `course`, `passingYear`, `percentage`) VALUES (?);";
 		let education = [education1, education2, education3, education4].filter(e => e.length);
 		var output = await insert(sql1, education)
 		var workExperience1 = []
@@ -807,7 +815,7 @@ const jobApplicationWithoutAjaxInsertPost = async (req, res) => {
 			}
 		})
 		let technologies = [technologies1, technologies2, technologies3, technologies4].filter(t => t.length);
-		let sql5_1 = "INSERT INTO `jobAppDB29`.`technologies` (`AplicantId`, `technology`, `isBeginner`, `isMidiater`, `isExpert`) VALUES ";
+		let sql5_1 = "INSERT INTO `technologies` (`AplicantId`, `technology`, `isBeginner`, `isMidiater`, `isExpert`) VALUES ";
 		let sql5_2 = "";
 		for (i in technologies) {
 			sql5_2 += "(?),"
@@ -834,7 +842,7 @@ const jobApplicationWithoutAjaxInsertPost = async (req, res) => {
 			reference1 = [];
 		}
 		reference = reference.filter(r => r.length);
-		let sql6_1 = "INSERT INTO `jobAppDB29`.`reference` (`AplicantId`, `name`, `contactNumber`, `relation`) VALUES"
+		let sql6_1 = "INSERT INTO `reference` (`AplicantId`, `name`, `contactNumber`, `relation`) VALUES"
 		let sql6_2 = "";
 		for (i in reference) {
 			sql6_2 += "(?),";
@@ -860,7 +868,7 @@ const jobApplicationWithoutAjaxInsertPost = async (req, res) => {
 		if (data.department) {
 			pereference.push(data.department)
 		}
-		let sql7 = "INSERT INTO `jobAppDB29`.`preferances` (`AplicantId`, `prefere_location`, `noticePeriod`, `expactedCTC`, `currentCTC`, `department`) VALUES (?);"
+		let sql7 = "INSERT INTO `preferances` (`AplicantId`, `prefere_location`, `noticePeriod`, `expactedCTC`, `currentCTC`, `department`) VALUES (?);"
 
 		let pereferences = []
 		pereferences.push(pereference)

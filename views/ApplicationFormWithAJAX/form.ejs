@@ -40,15 +40,21 @@
   var tab = document.getElementsByClassName('next');
   tab[0].style.display = 'block';
   var count = 0
+  let flag=0
   next.onclick = () => {
     if(next.innerText=='Submit'){
-      submitForm();
+      flag=1
     }
-    if(count >= 6) {
+    if(count > 6) {
       return;
     }
     if(validation[count]()){
-      count++;
+      if(count == 6 && flag){
+        submitForm();
+      }
+      else{
+        count++;
+      }
     }
     else{
       return;
@@ -109,6 +115,9 @@
     alert(data);
     if(data.indexOf('Successfully')){
       window.location.href='/ApplicationFormWithAJAX/';
+    }
+    else{
+      
     }
   }
 </script>
